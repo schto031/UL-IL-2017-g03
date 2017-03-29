@@ -1,0 +1,33 @@
+/*
+@author Mikos
+@date Tue Mar 21 22:26:15 CET 2017
+*/
+
+
+@@Operation
+icrash.environment.actActivator.outactActivator.oeGenerate
+//parameters
+@parameter
+icrash.environment.actActivator.outactActivator.oeGenerate.AdtSmsCode
+""
+@endParameters
+
+@description "Used to generate a six-digit Code used for he sms based identification"
+//preProtocol descriptions
+@preP
+" "
+@endPreP
+//preFunctional descriptions
+@preF
+" "
+@endPreF
+//postFunctional descriptions
+@postF 
+" "
+@endPostF
+//postProtocol descriptions
+@postP 
+" "
+@endPostP
+//example
+@example" "

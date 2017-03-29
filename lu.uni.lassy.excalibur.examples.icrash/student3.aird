@@ -459,6 +459,18 @@
   <semanticResources>platform:/resource/lu.uni.lassy.excalibur.standard.specification.libraries/library/documentation/PrimaryType-Primitive-ptReal.msrd</semanticResources>
   <semanticResources>platform:/resource/lu.uni.lassy.excalibur.standard.specification.libraries/library/documentation/PrimaryType-Primitive-ptString.msrd</semanticResources>
   <semanticResources>documentation/View-em-gv-02.msrd</semanticResources>
+  <semanticResources>usecases/usecaseinstance-oeLogin-uciSmsIdentification.msr</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Datatype-dtSmsCode.msrd</semanticResources>
+  <semanticResources>usecases/documentation/UseCase-oeGenerate.msrd</semanticResources>
+  <semanticResources>concepts/messir.msr</semanticResources>
+  <semanticResources>suSMSValidation.msr</semanticResources>
+  <semanticResources>usecases/documentation/UseCase-oeSendSmsCode.msrd</semanticResources>
+  <semanticResources>usecases/documentation/UseCase-oeSmsControl.msrd</semanticResources>
+  <semanticResources>documentation/UseCase-suSMSValidation.msrd</semanticResources>
+  <semanticResources>concepts/documentation/Operation-dtSmsCode-is.msrd</semanticResources>
+  <semanticResources>environment/documentation/Operation-actComCompany-outactComCompany-oeSendSmsCode.msrd</semanticResources>
+  <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSmsControl.msrd</semanticResources>
+  <semanticResources>environment/documentation/Operation-actActivator-outactActivator-oeGenerate.msrd</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_WzMfgPWqEeSOM9Kfym77Zg">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
   </ownedViews>

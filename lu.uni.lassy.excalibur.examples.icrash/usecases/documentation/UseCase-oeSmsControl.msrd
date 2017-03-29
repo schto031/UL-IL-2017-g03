@@ -1,0 +1,27 @@
+/*
+@author Mikos
+@date Tue Mar 21 22:13:42 CET 2017
+*/
+
+
+@@Use Case Subfunction icrash.usecases.subfunctions.oeSmsControl
+@description "Used as a additional measure of security to validate the login"
+@parameter icrash.usecases.subfunctions.oeSmsControl.AdtSmsCode ""
+@endParameters
+@protocolCondition
+"
+The iCrash system has been deployed.
+"
+@endProtocolConditions
+@preCondition
+"
+"
+@endPreConditions
+@postCondition
+"
+"
+@endPostConditions
+@additionalInformation
+"
+none
+"

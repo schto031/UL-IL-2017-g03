@@ -1,0 +1,27 @@
+/*
+@author Mikos
+@date Tue Mar 21 22:05:02 CET 2017
+*/
+
+
+@@Use Case Subfunction icrash.usecases.subfunctions.oeSendSmsCode
+@description "The actor actComCompany sends an text message to the respective ActAuthenticated with his dtSmsCode used to validate the login "
+@protocolCondition
+"
+The iCrash system has been deployed.
+"
+@endProtocolConditions
+@preCondition
+"
+The actor actAuthenticated performed oeLogin successfully.
+"
+@endPreConditions
+@postCondition
+"
+The actor authenticated received an text message with his dtSmsCode needed to validate his login
+"
+@endPostConditions
+@additionalInformation
+"
+none
+"

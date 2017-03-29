@@ -1,0 +1,12 @@
+/*
+@author Mikos
+@date Tue Mar 21 17:27:35 CET 2017
+*/
+
+
+@@Primary Type Datatype icrash.concepts.primarytypes.datatypes.dtSmsCode
+@description "A six-digit code send by sms to confirm the login."
+@operation
+icrash.concepts.primarytypes.datatypes.dtSmsCode.is
+""
+@endOperations

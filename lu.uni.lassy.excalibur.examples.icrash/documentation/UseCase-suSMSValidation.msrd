@@ -1,0 +1,24 @@
+/*
+@author Mikos
+@date Tue Mar 21 22:24:23 CET 2017
+*/
+
+
+@@Use Case icrash.usecases.suSMSValidation.suSMSValidation
+@description "Used to validate the login by an sms based identification"
+@protocolCondition
+"
+"
+@endProtocolConditions
+@preCondition
+"
+"
+@endPreConditions
+@postCondition
+"
+"
+@endPostConditions
+@additionalInformation
+"
+none
+"
