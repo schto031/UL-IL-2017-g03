@@ -1,0 +1,24 @@
+/*
+@author peter
+@date Tue Mar 21 21:50:08 CET 2017
+*/
+
+
+@@Use Case icrash.usecases.suExpertiseLinking.suExpertiseLinking
+@description ""
+@protocolCondition
+"
+"
+@endProtocolConditions
+@preCondition
+"
+"
+@endPreConditions
+@postCondition
+"
+"
+@endPostConditions
+@additionalInformation
+"
+none
+"

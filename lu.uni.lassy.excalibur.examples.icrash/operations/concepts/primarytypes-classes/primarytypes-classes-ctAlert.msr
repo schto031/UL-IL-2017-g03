@@ -14,7 +14,7 @@ operation: icrash.concepts.primarytypes.classes.ctAlert.init(Aid:dtAlertID , Ast
 ):ptBoolean{
 postF{
 if
-(
+( 
 /* Post F01 */
 let Self:ctAlert in
 Self.id = Aid

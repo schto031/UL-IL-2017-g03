@@ -1,0 +1,16 @@
+/*
+@author peter
+@date Tue Mar 21 22:35:21 CET 2017
+*/
+
+
+@@Primary Type Datatype icrash.concepts.primarytypes.datatypes.dtAddOrDelete
+@description ""
+@attribute
+icrash.concepts.primarytypes.datatypes.dtAddOrDelete.attAdd
+""
+@endAttributes
+@operation
+icrash.concepts.primarytypes.datatypes.dtAddOrDelete.is
+""
+@endOperations

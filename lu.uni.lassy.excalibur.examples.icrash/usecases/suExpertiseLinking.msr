@@ -1,0 +1,41 @@
+/*
+* @author peter
+* @date Tue Mar 21 20:33:32 CET 2017
+*/
+
+package icrash.usecases.suExpertiseLinking {
+
+import lu.uni.lassy.messir.libraries.primitives
+import icrash.concepts.primarytypes.datatypes
+import icrash.environment
+import icrash.usecases.suGlobalCrisisHandling
+import icrash.usecases.ugAdministrateTheSystem
+import icrash.usecases.subfunctions
+import icrash.usecases.ugSecurelyUseSystem
+
+
+	Use Case Model {
+		use case system summary suExpertiseLinking() {
+			actor actCoordinator[primary,active]
+			actor actComCompany[secondary]
+			
+			reuse ugSecurelyUseSystem[1..*]
+			reuse oeAlert[1..*]
+			reuse oeChooseCrisisHandler[1..*]
+			reuse oeDeclineExpertiseQualification[1..*]
+			
+			step a : actCoordinator executes ugSecurelyUseSystem()
+			
+			step b : actComCompany executes oeAlert(AetKind,AdtMyDate,AdtTime,AdtPhoneNumber,AdtGPSLocation,AdtExpertise,AdtComment)
+			
+			step c : actCoordinator executes oeDeclineExpertiseQualification(AdtDecline)
+			
+			step d: actCoordinator executes  oeChooseCrisisHandler(AdtCrisisID,AdtCoordinatorID)
+			
+			
+		}
+
+	}
+
+
+}

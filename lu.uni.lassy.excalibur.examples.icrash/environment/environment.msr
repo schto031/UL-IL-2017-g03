@@ -57,7 +57,9 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation oeCloseCrisis(AdtCrisisID:dtCrisisID ):ptBoolean
 				operation oeGetAlertsSet(AetAlertStatus:etAlertStatus ):ptBoolean
 				operation oeGetCrisisSet(AetCrisisStatus:etCrisisStatus ):ptBoolean
-				operation oeSetCrisisHandler(AdtCrisisID:dtCrisisID ):ptBoolean
+				operation oeSetCrisisHandler(AdtCrisisID:dtCrisisID):ptBoolean
+				operation oeDeclineExpertiseQualification(Adtdecline:ptBoolean,AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID) :ptBoolean
+				operation oeChooseCrisisHandler(AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID):ptBoolean
 				operation oeReportOnCrisis(
 											AdtCrisisID:dtCrisisID ,
 											AdtComment:dtComment 
@@ -74,6 +76,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			}
 			
 			input interface inactCoordinator{
+				operation ieGetCoordinatorListedByExpertises(AdtCoordinatorID:dtCoordinatorID): ptBoolean
 				operation ieSendAnAlert(ActAlert:ctAlert ):ptBoolean
 				operation ieSendACrisis(ActCrisis:ctCrisis ):ptBoolean
 	 		}
@@ -109,6 +112,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			output interface outactAuthenticated{
 				operation oeLogin(AdtLogin:dtLogin , AdtPassword:dtPassword ):ptBoolean
 				operation oeLogout():ptBoolean
+				operation oeSetExpertise(AdtExpertise:etExpertise,AdtAddOrDelete:dtAddOrDelete) : ptBoolean
 				operation oeSmsControl(AdtSmsCode:dtSmsCode):ptBoolean
 			}
 			

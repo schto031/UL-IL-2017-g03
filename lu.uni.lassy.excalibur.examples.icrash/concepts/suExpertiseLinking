@@ -1,0 +1,16 @@
+/*
+* @author peter
+* @date Tue Mar 21 20:30:23 CET 2017
+*/
+
+package icrash.usecases.suExpertiseLinking {
+
+import lu.uni.lassy.messir.libraries.primitives
+
+
+	Use Case Model {
+
+	}
+
+
+}

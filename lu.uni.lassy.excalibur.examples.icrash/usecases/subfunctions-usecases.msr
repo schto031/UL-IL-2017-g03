@@ -21,6 +21,13 @@ import icrash.environment
     }
   }
 //----------------------------------------------------
+use case system subfunction oeSetExpertise (AdtExpertise:etExpertise,AdtAddOrDelete:dtAddOrDelete){
+ actor actAuthenticated[primary,active]
+ returned messages {
+	ieMessage(AMessage) returned to actAuthenticated	
+	}
+}
+//----------------------------------------------------
   use case system subfunction oeAlert(
                                    AetKind:etHumanKind,
                                    AdtMyDate:dtDate,
@@ -138,7 +145,21 @@ import icrash.environment
   use case system subfunction oeGenerate(AdtSmsCode:dtSmsCode) {
 			actor actActivator[primary, active]
 		}
-	use case system subfunction oeSmsControl(AdtSmsCode:dtSmsCode) {
+		
+	use case system subfunction oeChooseCrisisHandler(AdtCrisisID:dtCrisisID, AdtCoordinatorID:dtCoordinatorID) {
+			actor actCoordinator[primary, active]
+			returned messages {
+				ieMessage(AMessage) returned to actCoordinator
+			}
+		}
+	use case system subfunction oeDeclineExpertiseQualification(AdtDecline: ptBoolean) {
+			actor actCoordinator[primary, active]
+			returned messages {
+				ieMessage(AMessage) returned to actCoordinator
+				ieGetCoordinatorListedByExpertises(AdtCoordinatorID) returned to actCoordinator
+			}
+		}
+			use case system subfunction oeSmsControl(AdtSmsCode:dtSmsCode) {
 			actor actAuthenticated[primary, active]
 		}
 	use case system subfunction oeSendSmsCode() {

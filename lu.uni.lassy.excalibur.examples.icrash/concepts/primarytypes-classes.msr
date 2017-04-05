@@ -5,7 +5,7 @@ import icrash.environment
 import lu.uni.lassy.messir.libraries.primitives
 import lu.uni.lassy.messir.libraries.math
 import lu.uni.lassy.messir.libraries.calendar
-//Comment
+
 	Concept Model {
 		
 		Primary Types{
@@ -114,6 +114,13 @@ import lu.uni.lassy.messir.libraries.calendar
 										Alogin:dtLogin ,
 										Apwd:dtPassword ):ptBoolean
 			}
+		class clExpertrises 
+		role rnclExpertrises 
+		cardinality[0 .. *] 
+		extends ctCoordinator,ctCrisis {
+			attribute Epertises: etExpertise
+			}
+
 		}
 	}
 }
