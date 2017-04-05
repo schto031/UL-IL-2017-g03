@@ -47,7 +47,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			class ctCrisis role rnctCrisis cardinality [0..*]{
 				attribute id:dtCrisisID
 				attribute type:etCrisisType
-				attribute status: etCrisisStatus
+				attribute status:etCrisisStatus
 				attribute location:dtGPSLocation
 				attribute instant:dtDateAndTime
 				attribute comment:dtComment
@@ -61,7 +61,7 @@ import lu.uni.lassy.messir.libraries.calendar
 										Acomment:dtComment ):ptBoolean
 										
 				operation handlingDelayPassed():ptBoolean
-        operation maxHandlingDelayPassed():ptBoolean
+        		operation maxHandlingDelayPassed():ptBoolean
 				operation isSentToCoordinator(AactCoordinator:actCoordinator ):ptBoolean
 				operation isAllocatedIfPossible():ptBoolean
 			}

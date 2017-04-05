@@ -58,8 +58,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation oeGetAlertsSet(AetAlertStatus:etAlertStatus ):ptBoolean
 				operation oeGetCrisisSet(AetCrisisStatus:etCrisisStatus ):ptBoolean
 				operation oeSetCrisisHandler(AdtCrisisID:dtCrisisID):ptBoolean
-				operation oeDeclineExpertiseQualification(Adtdecline:ptBoolean,AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID) :ptBoolean
-				operation oeChooseCrisisHandler(AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID):ptBoolean
+				operation oeDeclineCaseAndAddExpertise(AdtCrisisID:dtCrisisID,AdtExpertises:etExpertise) :ptBoolean
 				operation oeReportOnCrisis(
 											AdtCrisisID:dtCrisisID ,
 											AdtComment:dtComment 
@@ -76,7 +75,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			}
 			
 			input interface inactCoordinator{
-				operation ieGetCoordinatorListedByExpertises(AdtCoordinatorID:dtCoordinatorID): ptBoolean
+				operation ieGetCrisisListedByExpertises(AdtCoordinatorID:dtCoordinatorID): ptBoolean
 				operation ieSendAnAlert(ActAlert:ctAlert ):ptBoolean
 				operation ieSendACrisis(ActCrisis:ctCrisis ):ptBoolean
 	 		}
