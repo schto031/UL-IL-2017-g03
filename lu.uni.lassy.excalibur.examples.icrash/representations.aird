@@ -903,7 +903,6 @@
     <semanticResources>concepts/documentation/PrimaryType-Datatype-dtSmsCode.msrd</semanticResources>
     <semanticResources>usecases/documentation/UseCase-oeGenerate.msrd</semanticResources>
     <semanticResources>concepts/messir.msr</semanticResources>
-    <semanticResources>suSMSValidation.msr</semanticResources>
     <semanticResources>usecases/documentation/UseCase-oeSendSmsCode.msrd</semanticResources>
     <semanticResources>usecases/documentation/UseCase-oeSmsControl.msrd</semanticResources>
     <semanticResources>documentation/UseCase-suSMSValidation.msrd</semanticResources>
@@ -911,6 +910,7 @@
     <semanticResources>environment/documentation/Operation-actComCompany-outactComCompany-oeSendSmsCode.msrd</semanticResources>
     <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSmsControl.msrd</semanticResources>
     <semanticResources>environment/documentation/Operation-actActivator-outactActivator-oeGenerate.msrd</semanticResources>
+    <semanticResources>usecases/suSMSValidation.msr</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_Aguk8EY3EeOwoLagakxXNQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_8IZyuNKSEeadaP6YRq5p0w" name="cm-pt-ct-gv-01" representation="_frDQIFBBEeOoKst3jxjvgA">
