@@ -56,7 +56,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation oeInvalidateAlert(AdtAlertID:dtAlertID ):ptBoolean
 				operation oeCloseCrisis(AdtCrisisID:dtCrisisID ):ptBoolean
 				operation oeGetAlertsSet(AetAlertStatus:etAlertStatus ):ptBoolean
-				operation oeGetCrisisSet(AetCrisisStatus:etCrisisStatus ):ptBoolean
+				operation oeGetCrisisSet(AetCrisisStatus:etCrisisStatus,AdtExpertise:clExpertrises):ptBoolean
 				operation oeSetCrisisHandler(AdtCrisisID:dtCrisisID):ptBoolean
 				operation oeSetCrisisExpertise(AdtCrisisID:dtCrisisID,AdtExpertises:etExpertise) :ptBoolean
 				operation oeReportOnCrisis(

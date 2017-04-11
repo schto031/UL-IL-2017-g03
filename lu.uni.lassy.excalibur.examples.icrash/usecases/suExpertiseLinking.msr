@@ -29,6 +29,8 @@ import icrash.usecases.ugSecurelyUseSystem
 			
 			step c : actCoordinator executes oeSetCrisisExp(AdtCrisisID,AdtCoordinatorID,AdtExpertises)
 			
+			step d : actCoordinator executes oeGetCrisisSet(AetCrisisStatus)
+			
 			
 		}
 

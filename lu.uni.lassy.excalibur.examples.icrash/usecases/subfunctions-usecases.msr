@@ -73,7 +73,7 @@ use case system subfunction oeSetCoordinatorExp (AdtExpertise:etExpertise,AdtAdd
     }
   }
 //----------------------------------------------------
-  use case system subfunction oeGetCrisisSet(AetCrisisStatus:etCrisisStatus){
+  use case system subfunction oeGetCrisisSet(AetCrisisStatus:etCrisisStatus,AdtExpertise:clExpertrises){
     actor actCoordinator[primary,active]
     returned messages {
       ieSendACrisis(ActCrisis) returned to actCoordinator
