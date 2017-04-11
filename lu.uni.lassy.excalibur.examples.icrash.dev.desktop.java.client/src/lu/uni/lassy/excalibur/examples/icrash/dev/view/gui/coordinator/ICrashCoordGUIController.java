@@ -79,6 +79,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     /** The textfield for entering in the username for logging on. */
     @FXML
     private TextField txtfldCoordLogonUserName;
+    
+    /** The textfield for entering in the SmsCode for logging on. */
+    @FXML
+    private TextField txtfldCoordSmsCode;
 
     /** The passwordfield for entering in the password for logging on. */
     @FXML
@@ -87,6 +91,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     /** The button that allows a user to initiate the logon function. */
     @FXML
     private Button bttnCoordLogon;
+    
+    /** The button that allows a user to initiate the logon function. */
+    @FXML
+    private Button bttnCoordSmsIdentification;
 
     /** The main tabpane that holds the normal user controls. */
     @FXML
@@ -451,7 +459,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	public void logon() {
 		if(txtfldCoordLogonUserName.getText().length() > 0 && psswrdfldCoordLogonPassword.getText().length() > 0){
 			try {
-				if (userController.oeLogin(txtfldCoordLogonUserName.getText(), psswrdfldCoordLogonPassword.getText()).getValue()){
+				if (userController.oeLogin(txtfldCoordLogonUserName.getText(), psswrdfldCoordLogonPassword.getText(),txtfldCoordSmsCode.getText()).getValue()){
 					if (userController.getUserType() == UserType.Coordinator){
 						logonShowPanes(true);
 					}

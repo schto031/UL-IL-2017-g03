@@ -161,4 +161,11 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		return new PtBoolean(true);
 	}
 
+	@Override
+	public PtBoolean oeLogin(DtLogin aDtLogin, DtPassword aDtPassword, DtPassword aDtSmsCode)
+			throws RemoteException, NotBoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

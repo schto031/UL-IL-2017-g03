@@ -67,7 +67,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     /** The textfield that allows input of a username for logon. */
     @FXML
     private TextField txtfldAdminUserName;
-
+    
+    /** The textfield that allows input of a Sms Code for logon. */
+    @FXML
+    private TextField txtfldSmsCode;
     /** The passwordfield that allows input of a password for logon. */
     @FXML
     private PasswordField psswrdfldAdminPassword;
@@ -76,6 +79,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     @FXML
     private Button bttnAdminLogin;
 
+    /** The button that initiates the Sms validation function. */
+    @FXML
+    private Button bttnSmsCode;
+    
     /** The borderpane that contains the normal controls the user will use. */
     @FXML
     private BorderPane brdpnAdmin;
@@ -129,6 +136,15 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     void bttnBottomLoginPaneLogin_OnClick(ActionEvent event) {
     	logon();
     }
+    
+    @FXML
+    void bttnSmsIdentification_OnClick(ActionEvent event) {
+    	logon();
+    }
+    
+    
+    
+    
 
     /**
      * The button event that will initiate the logging off of a user
@@ -286,9 +302,9 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@Override
 	public void logon() {
-		if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0){
+		if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0 && txtfldSmsCode.getText().length() > 0){
 			try {
-				if (userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText()).getValue())
+				if (userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText(), txtfldSmsCode.getText()).getValue())
 					logonShowPanes(true);
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {

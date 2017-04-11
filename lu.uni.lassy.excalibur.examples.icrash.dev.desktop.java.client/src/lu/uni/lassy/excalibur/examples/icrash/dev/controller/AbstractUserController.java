@@ -52,11 +52,13 @@ public abstract class AbstractUserController implements HasListeners {
 	 * @throws ServerOfflineException Thrown if the server is currently offline
 	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings
 	 */
-	public PtBoolean oeLogin(String login, String password) throws ServerOfflineException, ServerNotBoundException{
+	public PtBoolean oeLogin(String login, String password, String smscode) throws ServerOfflineException, ServerNotBoundException{
 		DtLogin aDtLogin = new DtLogin(new PtString(login));
 		DtPassword aDtPassword = new DtPassword(new PtString(password));
+		DtPassword aDtSmsCode = new DtPassword(new PtString(smscode));//!!Change dt find location
 		try {
-			return this.getAuth().oeLogin(aDtLogin, aDtPassword);
+			return this.getAuth().oeLogin(aDtLogin, aDtPassword, aDtSmsCode);
+			//!!!add adtSmsCode
 		} catch (RemoteException e) {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerOfflineException();
@@ -65,6 +67,21 @@ public abstract class AbstractUserController implements HasListeners {
 			throw new ServerNotBoundException();
 		}
 	}
+	
+	/**  public static String generateSmsCode() {
+        String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ0123456789";
+
+        String pw = "";
+        for (int i = 0; i < 6; i++) {
+            int index = (int) (RANDOM.nextDouble() * letters.length());
+            pw += letters.substring(index);
+        }
+        return pw;
+    }
+	 * 
+	 * 
+	 */
+	
 	/**
 	 * The method that allows the user to logoff.
 	 *
