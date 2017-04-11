@@ -134,10 +134,20 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      */
     @FXML
     void bttnBottomLoginPaneLogin_OnClick(ActionEvent event) {
-    	logon();
+    	generateSmsCode();
     }
     
-    @FXML
+    private void generateSmsCode() {
+    	if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0 ){
+    		String Login = txtfldAdminUserName.getText();
+    		String Pw = psswrdfldAdminPassword.getText();
+    		txtfldSmsCode.setText(userController.oegenerateSmsCode(Login, Pw));
+				
+			}
+		
+	}
+
+	@FXML
     void bttnSmsIdentification_OnClick(ActionEvent event) {
     	logon();
     }

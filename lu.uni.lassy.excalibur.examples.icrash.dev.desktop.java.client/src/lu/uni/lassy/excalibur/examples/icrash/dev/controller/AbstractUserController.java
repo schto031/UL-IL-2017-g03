@@ -14,6 +14,8 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.controller;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Random;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated;
@@ -55,10 +57,10 @@ public abstract class AbstractUserController implements HasListeners {
 	public PtBoolean oeLogin(String login, String password, String smscode) throws ServerOfflineException, ServerNotBoundException{
 		DtLogin aDtLogin = new DtLogin(new PtString(login));
 		DtPassword aDtPassword = new DtPassword(new PtString(password));
-		DtPassword aDtSmsCode = new DtPassword(new PtString(smscode));//!!Change dt find location
+		DtPassword aDtSmsCode = new DtPassword(new PtString(smscode));
 		try {
 			return this.getAuth().oeLogin(aDtLogin, aDtPassword, aDtSmsCode);
-			//!!!add adtSmsCode
+			
 		} catch (RemoteException e) {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerOfflineException();
@@ -68,19 +70,19 @@ public abstract class AbstractUserController implements HasListeners {
 		}
 	}
 	
-	/**  public static String generateSmsCode() {
+	  public String oegenerateSmsCode(String login, String password){
+	  
+	 final Random RANDOM = new Random();
         String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ0123456789";
 
-        String pw = "";
+       String smscode = "";
         for (int i = 0; i < 6; i++) {
             int index = (int) (RANDOM.nextDouble() * letters.length());
-            pw += letters.substring(index);
+            smscode += letters.substring(index,index+1);
+           
         }
-        return pw;
+        return smscode;
     }
-	 * 
-	 * 
-	 */
 	
 	/**
 	 * The method that allows the user to logoff.
