@@ -310,8 +310,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);
 			}	
-    	}
-    	else
+   	}
+   	else
     		showWarningNoDataEntered();
 	}
 

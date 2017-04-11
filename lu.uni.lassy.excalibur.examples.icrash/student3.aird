@@ -471,6 +471,15 @@
   <semanticResources>environment/documentation/Operation-actComCompany-outactComCompany-oeSendSmsCode.msrd</semanticResources>
   <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSmsControl.msrd</semanticResources>
   <semanticResources>environment/documentation/Operation-actActivator-outactActivator-oeGenerate.msrd</semanticResources>
+  <semanticResources>usecases/suExpertiseLinking.msr</semanticResources>
+  <semanticResources>usecases/usecaseinstance-suExpertiseLinking-ucisuExpertiseLinking.msr</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Datatype-dtAddOrDelete.msrd</semanticResources>
+  <semanticResources>usecases/documentation/UseCase-suExpertiseLinking.msrd</semanticResources>
+  <semanticResources>documentation/View-uci-ucisuExpertiseLinking.msrd</semanticResources>
+  <semanticResources>usecaseinstance-suSMSValidation-ucisuSMSValidation.msr</semanticResources>
+  <semanticResources>platform:/resource/lu.uni.lassy.excalibur.examples.icrash//usecaseinstance-suSMSValidation-ucisuSMSValidation.msr</semanticResources>
+  <semanticResources>documentation/View-uci-ucisuSMSValidation.msrd</semanticResources>
+  <semanticResources>documentation/View-uc-suExpertiseLinking.msrd</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_WzMfgPWqEeSOM9Kfym77Zg">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
   </ownedViews>

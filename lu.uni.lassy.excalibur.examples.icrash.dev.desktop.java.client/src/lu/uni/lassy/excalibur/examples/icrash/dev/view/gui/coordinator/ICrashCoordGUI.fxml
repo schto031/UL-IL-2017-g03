@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.ICrashCoordGUIController">
+<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.ICrashCoordGUIController">
   <children>
     <SplitPane dividerPositions="0.6204819277108434" orientation="VERTICAL" prefHeight="509.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
@@ -63,6 +63,11 @@
                                 <Button fx:id="bttnHandleCrisis" alignment="CENTER" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" onAction="#bttnHandleCrisis_OnClick" prefHeight="50.0" prefWidth="100.0" text="Handle crisis" textAlignment="CENTER" wrapText="true" />
                                 <Button fx:id="bttnCloseCrisis" alignment="CENTER" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" onAction="#bttnCloseCrisis_OnClose" prefHeight="50.0" prefWidth="100.0" text="Close crisis" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
                                 <Button fx:id="bttnReportCrisis" alignment="CENTER" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" onAction="#bttnReportCrisis_OnClick" prefHeight="50.0" prefWidth="100.0" text="Report on crisis" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Change Expertise" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
                                 <Button fx:id="bttnChangeStatusCrisis" alignment="CENTER" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" onAction="#bttnChangeStatusCrisis_OnClick" prefHeight="50.0" prefWidth="100.0" text="Change crisis status" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" />
                                 <ComboBox fx:id="cmbbxCrisisStatus" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               </children>
@@ -121,6 +126,11 @@
               <bottom>
                 <HBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
                   <children>
+                              <Button disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Add Expertises">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
                     <Button id="bttnTopLogoff" fx:id="bttnCoordLogoff" disable="true" font="$x1" mnemonicParsing="false" onAction="#bttnCoordLogoff_OnClick" prefHeight="50.0" prefWidth="100.0" text="Logoff" />
                   </children>
                 </HBox>

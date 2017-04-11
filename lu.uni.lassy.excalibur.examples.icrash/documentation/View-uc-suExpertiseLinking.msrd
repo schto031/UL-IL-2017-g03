@@ -1,0 +1,10 @@
+/*
+@author peter
+@date Tue Apr 11 21:38:17 CEST 2017
+*/
+
+
+@@view uc-suExpertiseLinking
+@model Use-Case icrash.usecases.suExpertiseLinking.suExpertiseLinking 
+@description ""
+@caption ""

@@ -22,6 +22,7 @@ import icrash.usecases.ugSecurelyUseSystem
 			reuse ugSecurelyUseSystem[1..*]
 			reuse oeAlert[1..*]
 			reuse oeSetCrisisExp[1..*]
+			reuse oeGetCrisisSet[0..*]
 			
 			step a : actCoordinator executes ugSecurelyUseSystem()
 			
@@ -29,7 +30,11 @@ import icrash.usecases.ugSecurelyUseSystem
 			
 			step c : actCoordinator executes oeSetCrisisExp(AdtCrisisID,AdtCoordinatorID,AdtExpertises)
 			
-			step d : actCoordinator executes oeGetCrisisSet(AetCrisisStatus)
+			step d : actCoordinator executes oeGetCrisisSet(AetCrisisStatus,AdtExpertise)
+			
+			ordering constraint
+	
+			"All the steps have to be executed successfully before the next step"
 			
 			
 		}

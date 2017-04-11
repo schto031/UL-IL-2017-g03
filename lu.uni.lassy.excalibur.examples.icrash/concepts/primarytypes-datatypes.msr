@@ -63,7 +63,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation is():ptBoolean
 			}
 			enum etExpertise {
-				constants ["Fire","Oversize transport","Hazardous Elements","Mass crash","Snow"]
+				constants ["Fire","Oversize transport","Hazardous Elements","Mass crash","Snow","none"]
 				operation is() : ptBoolean
 			}
 			datatype dtAddOrDelete {

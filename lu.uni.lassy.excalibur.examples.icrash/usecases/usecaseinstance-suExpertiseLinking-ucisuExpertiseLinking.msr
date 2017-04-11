@@ -1,0 +1,47 @@
+package usecases.ucisuExpertiseLinking {
+	import icrash.usecases.suExpertiseLinking
+
+	Use Case Model {
+
+		use case instance ucisuExpertiseLinking : suExpertiseLinking{
+			actors {
+				Tango:icrash.environment.actComCompany
+				Bob:icrash.environment.actCoordinator
+			}
+			use case steps {
+				Bob 
+				executed 
+				
+				usecases.uciugSecurelyUseSystem.uciugSecurelyUseSystem()
+				
+				Tango 
+				
+				executed instanceof subfunction 
+				
+				icrash.usecases.subfunctions.oeAlert(AetKind="witness", AdtMyDate="2017:11:26", AdtTime="10:45:00", AdtPhoneNumber="+32145778", AdtGPSLocation="121,1422", AdtComment="Fire")
+				
+				Bob 
+				
+				executed instanceof subfunction 
+				
+				icrash.usecases.subfunctions.oeSetCrisisExp(AdtCrisisID="1", AdtCoordinatorID="2", AdtExpertises="none")
+				
+				{
+					ieMessage("AMessage") returned to Bob
+				}
+				
+				
+				Bob 
+				
+				executed instanceof subfunction 
+				
+				icrash.usecases.subfunctions.oeGetCrisisSet(AetCrisisStatus="pending", AdtExpertise="none")
+				
+				{
+					ieSendACrisis("ActCrisis") returned to Bob
+				}
+				
+			}
+		}
+	}
+}

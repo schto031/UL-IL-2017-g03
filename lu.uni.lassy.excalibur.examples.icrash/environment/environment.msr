@@ -75,7 +75,6 @@ import lu.uni.lassy.messir.libraries.calendar
 			}
 			
 			input interface inactCoordinator{
-				operation ieGetCrisisListedByExpertises(AdtCoordinatorID:dtCoordinatorID): ptBoolean
 				operation ieSendAnAlert(ActAlert:ctAlert ):ptBoolean
 				operation ieSendACrisis(ActCrisis:ctCrisis ):ptBoolean
 	 		}
