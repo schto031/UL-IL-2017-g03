@@ -25,7 +25,7 @@ package ucisuSMSValidation {
          main
          executed instanceof subfunction
          
-         icrash.usecases.subfunctions.oeGenerate()
+         icrash.usecases.subfunctions.oeGenerateSmsCode()
              {ieMessage("ABC123") returned to tango
              	
              }

@@ -142,7 +142,7 @@ use case system subfunction oeSetCoordinatorExp (AdtExpertise:etExpertise,AdtAdd
       ieMessage(AMessage) returned to actCoordinator
     }
   }
-  use case system subfunction oeGenerate(AdtSmsCode:dtSmsCode) {
+  use case system subfunction oeGenerateSmsCode(AdtSmsCode:dtSmsCode) {
 			actor actActivator[primary, active]
 		}
 		

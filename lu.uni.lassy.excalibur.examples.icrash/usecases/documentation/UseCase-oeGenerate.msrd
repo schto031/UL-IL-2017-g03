@@ -4,7 +4,7 @@
 */
 
 
-@@Use Case Subfunction icrash.usecases.subfunctions.oeGenerate
+@@Use Case Subfunction icrash.usecases.subfunctions.oeGenerateSmsCode
 @description "An SmsCode is generated and updated for the actAuthenticated"
 @protocolCondition
 "
