@@ -146,7 +146,7 @@ use case system subfunction oeSetCoordinatorExp (AdtExpertise:etExpertise,AdtAdd
 			actor actActivator[primary, active]
 		}
 		
-	use case system subfunction oeDeclineCaseAndAddExpertises(AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID,AdtExpertises:etExpertise) {
+	use case system subfunction oeSetCrisisExp(AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID,AdtExpertises:etExpertise) {
 			actor actCoordinator[primary, active]
 			returned messages {
 				ieMessage(AMessage) returned to actCoordinator
