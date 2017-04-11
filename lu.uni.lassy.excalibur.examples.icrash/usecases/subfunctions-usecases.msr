@@ -21,7 +21,7 @@ import icrash.environment
     }
   }
 //----------------------------------------------------
-use case system subfunction oeSetExpertise (AdtExpertise:etExpertise,AdtAddOrDelete:dtAddOrDelete){
+use case system subfunction oeSetCoordinatorExp (AdtExpertise:etExpertise,AdtAddOrDelete:dtAddOrDelete){
  actor actAuthenticated[primary,active]
  returned messages {
 	ieMessage(AMessage) returned to actAuthenticated	

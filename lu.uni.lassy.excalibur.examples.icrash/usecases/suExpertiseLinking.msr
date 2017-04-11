@@ -21,13 +21,13 @@ import icrash.usecases.ugSecurelyUseSystem
 			
 			reuse ugSecurelyUseSystem[1..*]
 			reuse oeAlert[1..*]
-			reuse oeDeclineCaseAndAddExpertises[1..*]
+			reuse oeSetCrisisExp[1..*]
 			
 			step a : actCoordinator executes ugSecurelyUseSystem()
 			
-			step b : actComCompany executes oeAlert(AetKind,AdtMyDate,AdtTime,AdtPhoneNumber,AdtGPSLocation,AdtExpertise,AdtComment)
+			step b : actComCompany executes oeAlert(AetKind,AdtMyDate,AdtTime,AdtPhoneNumber,AdtGPSLocation,AdtComment)
 			
-			step c : actCoordinator executes oeDeclineCaseAndAddExpertises(AdtDecline)
+			step c : actCoordinator executes oeSetCrisisExp(AdtCrisisID,AdtCoordinatorID,AdtExpertises)
 			
 			
 		}
