@@ -19,14 +19,14 @@ import icrash.usecases.subfunctions
 			actor actComCompany[secondary,proactive]
 			
 			reuse oeLogin[1..*]
-			reuse oeGenerate[1..*] 
+			reuse oeGenerateSmsCode[1..*] 
 			reuse oeSendSmsCode[1..*]
 			reuse oeSmsControl[1..*]
 
 			step a: actAuthenticated 
 			        executes oeLogin
 			step b: actActivator
-			        executes oeGenerate
+			        executes oeGenerateSmsCode
 			step c: actComCompany
 					executes oeSendSmsCode
 			step d: actAuthenticated
