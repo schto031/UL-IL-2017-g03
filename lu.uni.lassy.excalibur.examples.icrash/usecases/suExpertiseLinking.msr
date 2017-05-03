@@ -28,9 +28,9 @@ import icrash.usecases.ugSecurelyUseSystem
 			
 			step b : actComCompany executes oeAlert(AetKind,AdtMyDate,AdtTime,AdtPhoneNumber,AdtGPSLocation,AdtComment)
 			
-			step c : actCoordinator executes oeSetCrisisExp(AdtCrisisID,AdtCoordinatorID,AdtExpertises)
+			step c : actCoordinator executes oeSetCrisisExp(AdtCrisisID,AdtExpertises)
 			
-			step d : actCoordinator executes oeGetCrisisSet(AetCrisisStatus,AdtExpertise)
+			step d : actCoordinator executes oeGetCrisisSet(AetCrisisStatus,AdtCoordinatorID)
 			
 			ordering constraint
 	
