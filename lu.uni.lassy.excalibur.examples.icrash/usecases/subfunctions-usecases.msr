@@ -21,7 +21,7 @@ import icrash.environment
     }
   }
 //----------------------------------------------------
-use case system subfunction oeSetCoordinatorExp (AdtExpertise:etExpertise,AdtAddOrDelete:dtAddOrDelete){
+use case system subfunction oeSetCoodinatorExpertise (AdtExpertise:etExpertise,AdtAddOrDelete:dtAddOrDelete){
  actor actAuthenticated[primary,active]
  returned messages {
 	ieMessage(AMessage) returned to actAuthenticated	
@@ -146,11 +146,10 @@ use case system subfunction oeSetCoordinatorExp (AdtExpertise:etExpertise,AdtAdd
 			actor actActivator[primary, active]
 		}
 		
-	use case system subfunction oeSetCrisisExp(AdtCrisisID:dtCrisisID,AdtCoordinatorID:dtCoordinatorID,AdtExpertises:etExpertise) {
+	use case system subfunction oeSetCrisisExpertis(AdtCrisisID:dtCrisisID,AdtExpertises:etExpertise) {
 			actor actCoordinator[primary, active]
 			returned messages {
 				ieMessage(AMessage) returned to actCoordinator
-				ieGetCrisisListedByExpertises(AdtCrisisID,AdtCrisisExpertise) returned to actCoordinator
 			}
 		}
 			use case system subfunction oeSmsControl(AdtSmsCode:dtSmsCode) {

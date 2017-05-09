@@ -118,8 +118,10 @@ import lu.uni.lassy.messir.libraries.calendar
 		role rnclExpertrises 
 		cardinality[0 .. *] 
 		extends ctCoordinator,ctCrisis {
-			attribute Epertises: etExpertise
+			attribute Expertises: etExpertise
+			operation init(Expertise:etExpertise):ptBoolean
 			}
+			
 
 		}
 	}

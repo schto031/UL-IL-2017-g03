@@ -22,6 +22,8 @@ icrash.environment.actCoordinator.outactCoordinator.oeGetCrisisSet
 //postFunctional descriptions
 @postF 
 " the post state is the one obtained by satisfying the \msrcode{isSentToCoordinator} predicate for each crisis having the provided status and for the actor sending the message \msrcode{ieSendACrisis}. (cf. specification of \msrcode{isSentToCoordinator} predicate given for the \msrcode{ctCrisis} type."
+@postF
+" each given crisis returned has to provide matching expertise fields with the Coordinator"
 @endPostF
 
 //postProtocol descriptions

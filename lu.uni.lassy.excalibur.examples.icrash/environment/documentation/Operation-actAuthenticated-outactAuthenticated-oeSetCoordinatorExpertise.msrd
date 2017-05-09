@@ -1,0 +1,44 @@
+/*
+@author peter
+@date Wed May 03 12:45:25 CEST 2017
+*/
+
+
+@@Operation
+icrash.environment.actAuthenticated.outactAuthenticated.oeSetCoordinatorExpertise
+//parameters
+@parameter
+icrash.environment.actAuthenticated.outactAuthenticated.oeSetCoordinatorExpertise.AdtExpertise
+"enumeration of possible expertises"
+@parameter
+icrash.environment.actAuthenticated.outactAuthenticated.oeSetCoordinatorExpertise.AdtAddOrDelete
+"boolean true if add and false if delete"
+@parameter
+icrash.environment.actAuthenticated.outactAuthenticated.oeSetCoordinatorExpertise.AdtCoordinatorID
+"serves the identification of an coordinator"
+@endParameters
+
+@description "with this operation a new association is either build or deleted between a coordinator and an expertise field 
+ "
+//preProtocol descriptions
+@preP
+"the system is started"
+@preP
+"the actor logged previously and did not log out ! (i.e. the associated ctCoordinator instance is considered logged)"
+@preP
+"if the addordelete variable is false the has to be a matching association"
+@endPreP
+//preFunctional descriptions
+@preF
+"none"
+@endPreF
+//postFunctional descriptions
+@postF 
+"An association of the Coordinator is either build or deleted"
+@endPostF
+//postProtocol descriptions
+@postP 
+"none"
+@endPostP
+//example
+@example"none"

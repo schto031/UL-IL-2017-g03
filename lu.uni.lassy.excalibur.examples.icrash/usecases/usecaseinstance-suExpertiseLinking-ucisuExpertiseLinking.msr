@@ -24,7 +24,7 @@ package usecases.ucisuExpertiseLinking {
 				
 				executed instanceof subfunction 
 				
-				icrash.usecases.subfunctions.oeSetCrisisExp(AdtCrisisID="1", AdtCoordinatorID="2", AdtExpertises="none")
+				icrash.usecases.subfunctions.oeSetCrisisExpertis(AdtCrisisID="1", AdtCoordinatorID="2", AdtExpertises="none")
 				
 				{
 					ieMessage("AMessage") returned to Bob

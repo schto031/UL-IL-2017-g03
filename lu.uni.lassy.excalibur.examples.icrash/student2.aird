@@ -479,6 +479,10 @@
   <semanticResources>documentation/View-uci-ucisuSMSValidation.msrd</semanticResources>
   <semanticResources>documentation/View-uc-suExpertiseLinking.msrd</semanticResources>
   <semanticResources>usecases/suSMSValidation.msr</semanticResources>
+  <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSetCoordinatorExpertise.msrd</semanticResources>
+  <semanticResources>environment/documentation/Operation-actCoordinator-outactCoordinator-oeSetCrisisExpertise.msrd</semanticResources>
+  <semanticResources>operations/environment/environment-actAuthenticated-oeSetCoordinatorExpertise.msr</semanticResources>
+  <semanticResources>operations/environment/environment-actCoordinator-oeSetCrisisExpertise.msr</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_VxVZ4PWqEeSOM9Kfym77Zg">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
   </ownedViews>

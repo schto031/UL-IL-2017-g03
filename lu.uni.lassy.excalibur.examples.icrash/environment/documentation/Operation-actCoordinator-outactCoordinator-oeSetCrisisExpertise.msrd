@@ -1,0 +1,50 @@
+/*
+@author peter
+@date Wed May 03 12:59:37 CEST 2017
+*/
+
+
+@@Operation
+icrash.environment.actCoordinator.outactCoordinator.oeSetCrisisExpertise
+//parameters
+@parameter
+icrash.environment.actCoordinator.outactCoordinator.oeSetCrisisExpertise.AdtCrisisID
+"serves the identification of the Crisis"
+@parameter
+icrash.environment.actCoordinator.outactCoordinator.oeSetCrisisExpertise.AdtExpertises
+"enumeration of possible expertise"
+
+@parameter icrash.environment.actCoordinator.outactCoordinator.oeSetCrisisExpertise.AdtAddOrDelete
+"boolean to identify the intention of the coordinator to either add or delete an expertise"
+@endParameters
+
+@description "with this operation a new association is either build or deleted between an instance of a crisis and an instance of an expertise field 
+ "
+//preProtocol descriptions
+@preP
+"the system is started"
+@preP
+"the actor logged previously and did not log out ! (i.e. the associated ctCoordinator instance is considered logged)"
+@endPreP
+//preFunctional descriptions
+@preF
+"an instance of a crisis with this CrisisID parameter exists"
+@endPreF
+//postFunctional descriptions
+@postF 
+"If the addordelete variable is true and there is no instance of the expertise linked to the crisis already existent a new instance is created and linked to this crisis"
+@postF
+"If the addordelete variable is false and if there exists an instance of that expertise linked to this crisis this existing linked expertise is deleted"
+@postF
+"If the addordelete variable is false and if there doesn't exists an instance of that expertise linked to this crisis an error message is send to the coordinator 
+indicating that the expertise he intended to delete doesn't exist for this crisis"
+@postF 
+"If the addordelete variable is true and there is instance of the expertise linked to the crisis already existent an error message is send to the coordinator 
+indicating that the expertise he intended to link to the crisis already exists for this crisis"
+@endPostF
+//postProtocol descriptions
+@postP 
+"none"
+@endPostP
+//example
+@example"none"
