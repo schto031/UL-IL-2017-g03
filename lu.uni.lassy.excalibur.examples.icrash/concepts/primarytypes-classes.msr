@@ -85,6 +85,7 @@ import lu.uni.lassy.messir.libraries.calendar
 
 				attribute login:dtLogin
 				attribute pwd: dtPassword
+				attribute smscode: dtSmsCode
 				attribute vpIsLogged:ptBoolean
 				
 				operation init(
