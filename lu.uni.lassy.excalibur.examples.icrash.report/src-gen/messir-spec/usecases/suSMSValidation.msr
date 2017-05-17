@@ -1,0 +1,41 @@
+/*
+* @author Mikos
+* @date Tue Mar 21 21:20:35 CET 2017
+*/
+
+package icrash.usecases.suSMSValidation {
+
+import lu.uni.lassy.messir.libraries.primitives
+import icrash.concepts.primarytypes.datatypes
+import icrash.environment
+import icrash.usecases.subfunctions
+
+	Use Case Model {
+		
+		use case system summary 
+		  suSMSValidation() {
+			actor actAuthenticated[primary,active]
+			actor actActivator[secondary,active]
+			actor actComCompany[secondary,proactive]
+			
+			reuse oeLogin[1..*]
+			reuse oeGenerateSmsCode[1..*] 
+			reuse oeSendSmsCode[1..*]
+			reuse oeSmsControl[1..*]
+
+			step a: actAuthenticated 
+			        executes oeLogin
+			step b: actActivator
+			        executes oeGenerateSmsCode
+			step c: actComCompany
+					executes oeSendSmsCode
+			step d: actAuthenticated
+			        executes oeSmsControl
+		
+		ordering constraint
+	"All the steps have to be executed successfully before the next step"
+
+	}
+	}
+
+}

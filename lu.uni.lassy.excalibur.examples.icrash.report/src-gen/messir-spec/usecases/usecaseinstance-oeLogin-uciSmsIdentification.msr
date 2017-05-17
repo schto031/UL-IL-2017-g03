@@ -1,0 +1,8 @@
+package usecases.uci {
+	import icrash.usecases.subfunctions
+
+	Use Case Model {
+
+		
+	}
+}

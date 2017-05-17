@@ -22,6 +22,12 @@ association assctAlertctHuman
 association assctCrisisctCoordinator
 	ctCrisis(rnHandled)[0..*]
 	ctCoordinator(rnHandler)[0..1]
+association relExpertise 
+	ctCoordinator(rnCoordinator)[1..1]
+	clExpertrises(rnExpertise)[0..*]
+association relExpertiseReq 
+	ctCrisis(rnCrisis)[1..1] 
+	clExpertrises(rnExpertises)[0..*]
 	
 // With Actors
 

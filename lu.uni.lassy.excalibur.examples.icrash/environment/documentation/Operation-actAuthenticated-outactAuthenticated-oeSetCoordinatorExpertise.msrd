@@ -18,7 +18,7 @@ icrash.environment.actAuthenticated.outactAuthenticated.oeSetCoordinatorExpertis
 "serves the identification of an coordinator"
 @endParameters
 
-@description "with this operation a new association is either build or deleted between a coordinator and an expertise field 
+@description "with this operation a new association is either build or deleted between a coordinator instance and an expertise field 
  "
 //preProtocol descriptions
 @preP
@@ -30,11 +30,19 @@ icrash.environment.actAuthenticated.outactAuthenticated.oeSetCoordinatorExpertis
 @endPreP
 //preFunctional descriptions
 @preF
-"none"
+"an instance of a coordinator with this CoordinatorID parameter exists"
 @endPreF
 //postFunctional descriptions
 @postF 
-"An association of the Coordinator is either build or deleted"
+"If the addordelete variable is true and there is no instance of the expertise linked to the coordinator already existent a new instance is created and linked to this coordinator"
+@postF
+"If the addordelete variable is false and if there exists an instance of that expertise linked to this coordinator this existing linked expertise is deleted"
+@postF
+"If the addordelete variable is false and if there doesn't exists an instance of that expertise linked to this coordinator an error message is send to the actor 
+indicating that the expertise he intended to delete doesn't exist for this coordinator"
+@postF 
+"If the addordelete variable is true and there is instance of the expertise linked to the coordinator already existent an error message is send to the actor
+indicating that the expertise he intended to link to the coordinator already exists for this coordinator"
 @endPostF
 //postProtocol descriptions
 @postP 

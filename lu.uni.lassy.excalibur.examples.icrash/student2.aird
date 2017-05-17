@@ -483,6 +483,18 @@
   <semanticResources>environment/documentation/Operation-actCoordinator-outactCoordinator-oeSetCrisisExpertise.msrd</semanticResources>
   <semanticResources>operations/environment/environment-actAuthenticated-oeSetCoordinatorExpertise.msr</semanticResources>
   <semanticResources>operations/environment/environment-actCoordinator-oeSetCrisisExpertise.msr</semanticResources>
+  <semanticResources>documentation/View-uci-ucisuExpertiseLinking.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Association-relExpertise.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Association-relExpertiseReq.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Class-clExpertrises.msrd</semanticResources>
+  <semanticResources>concepts/documentation/Operation-clExpertrises-init.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Enumeration-etExpertise.msrd</semanticResources>
+  <semanticResources>concepts/documentation/Operation-etExpertise-is.msrd</semanticResources>
+  <semanticResources>concepts/documentation/Operation-dtAddOrDelete-is.msrd</semanticResources>
+  <semanticResources>documentation/UseCaseInstance-ucisuSMSValidation.msrd</semanticResources>
+  <semanticResources>usecases/documentation/UseCase-oeSetCoodinatorExpertise.msrd</semanticResources>
+  <semanticResources>usecases/documentation/UseCase-oeSetCrisisExpertis.msrd</semanticResources>
+  <semanticResources>usecases/documentation/UseCaseInstance-ucisuExpertiseLinking.msrd</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_VxVZ4PWqEeSOM9Kfym77Zg">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
   </ownedViews>

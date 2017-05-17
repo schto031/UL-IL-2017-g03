@@ -1,0 +1,57 @@
+\subsection{Operation Model for oeSetCrisisExpertise}
+
+\label{OM-oeSetCrisisExpertise}
+
+
+The \msrcode{oeSetCrisisExpertise} operation has the following properties:
+
+	\begin{operationmodel}
+	\addheading{Operation}
+	\adddoublerow{oeSetCrisisExpertise}{with this operation a new association is either build or deleted between an instance of a crisis and an instance of an expertise field 
+	 }
+
+	\addrowheading{Parameters}
+	\addnumbereddoublerow{}{AdtCrisisID: dtCrisisID}{serves the identification of the Crisis} 
+	\addnumbereddoublerow{}{AdtExpertises: etExpertise}{enumeration of possible expertise} 
+	\addnumbereddoublerow{}{AdtAddOrDelete: dtAddOrDelete}{boolean to identify the intention of the coordinator to either add or delete an expertise} 
+
+	\addrowheading{Return type}
+	\addsinglerow{ptBoolean}
+
+	\addrowheading{Pre-Condition (protocol)}
+	\addnumberedsinglerow{PreP}{the system is started}
+	\addnumberedsinglerow{PreP}{the actor logged previously and did not log out ! (i.e. the associated ctCoordinator instance is considered logged)}
+		
+	\addrowheading{Pre-Condition (functional)}
+	\addnumberedsinglerow{PreF}{an instance of a crisis with this CrisisID parameter exists}
+
+	\addrowheading{Post-Condition (functional)}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is true and there is no instance of the expertise linked to the crisis already existent a new instance is created and linked to this crisis}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is false and if there exists an instance of that expertise linked to this crisis this existing linked expertise is deleted}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is false and if there doesn't exists an instance of that expertise linked to this crisis an error message is send to the coordinator 
+	indicating that the expertise he intended to delete doesn't exist for this crisis}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is true and there is instance of the expertise linked to the crisis already existent an error message is send to the coordinator 
+	indicating that the expertise he intended to link to the crisis already exists for this crisis}
+
+	\addrowheading{Post-Condition (protocol)}
+	\addnumberedsinglerow{PostP}{none}
+	\end{operationmodel}
+
+	\textbf{Example:}
+	\scriptsize
+	\lstset{language=PROLOG}
+	\begin{lstlisting}[firstnumber=auto,captionpos=b,caption=Example for \emph{oeSetCrisisExpertise} operation]
+	none
+	\end{lstlisting}
+	\normalsize
+
+
+	
+	
+	
+	
+
+
+
+
+

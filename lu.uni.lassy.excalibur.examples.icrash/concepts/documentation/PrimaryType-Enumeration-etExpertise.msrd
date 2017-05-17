@@ -1,0 +1,12 @@
+/*
+@author peter
+@date Wed May 10 13:08:25 CEST 2017
+*/
+
+
+@@Primary Type Enumeration icrash.concepts.primarytypes.datatypes.etExpertise
+@description ""
+@operation
+icrash.concepts.primarytypes.datatypes.etExpertise.is
+""
+@endOperations

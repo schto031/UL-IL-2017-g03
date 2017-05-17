@@ -1,0 +1,16 @@
+/*
+* @author Mikos
+* @date Tue Mar 21 20:32:58 CET 2017
+*/
+
+package lu.uni.lassy.excalibur.examples.icrash.concepts.sutest.msr {
+
+import lu.uni.lassy.messir.libraries.primitives
+
+
+	Use Case Model {
+
+	}
+
+
+}

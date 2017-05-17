@@ -1,0 +1,10 @@
+/*
+@author peter
+@date Wed May 10 13:08:18 CEST 2017
+*/
+
+
+@@view uci-ucisuExpertiseLinking
+@instance Use-Case usecases.ucisuExpertiseLinking.ucisuExpertiseLinking
+@description ""
+@caption ""

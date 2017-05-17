@@ -1,0 +1,27 @@
+/*
+@author peter
+@date Wed May 10 13:08:30 CEST 2017
+*/
+
+
+@@Use Case Subfunction icrash.usecases.subfunctions.oeSetCrisisExpertis
+@description ""
+@parameter icrash.usecases.subfunctions.oeSetCrisisExpertis.AdtCrisisID ""
+@parameter icrash.usecases.subfunctions.oeSetCrisisExpertis.AdtExpertises ""
+@endParameters
+@protocolCondition
+"
+"
+@endProtocolConditions
+@preCondition
+"
+"
+@endPreConditions
+@postCondition
+"
+"
+@endPostConditions
+@additionalInformation
+"
+none
+"

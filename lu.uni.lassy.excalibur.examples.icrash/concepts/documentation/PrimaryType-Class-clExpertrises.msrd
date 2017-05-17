@@ -1,0 +1,16 @@
+/*
+@author peter
+@date Wed May 10 13:08:23 CEST 2017
+*/
+
+
+@@Primary Type Class icrash.concepts.primarytypes.classes.clExpertrises
+@description ""
+@attribute
+icrash.concepts.primarytypes.classes.clExpertrises.Expertises
+""
+@endAttributes
+@operation
+icrash.concepts.primarytypes.classes.clExpertrises.init
+""
+@endOperations

@@ -1,0 +1,53 @@
+\subsection{Operation Model for oeSetCoordinatorExpertise}
+
+\label{OM-oeSetCoordinatorExpertise}
+
+
+The \msrcode{oeSetCoordinatorExpertise} operation has the following properties:
+
+	\begin{operationmodel}
+	\addheading{Operation}
+	\adddoublerow{oeSetCoordinatorExpertise}{with this operation a new association is either build or deleted between a coordinator and an expertise field 
+	 }
+
+	\addrowheading{Parameters}
+	\addnumbereddoublerow{}{AdtExpertise: etExpertise}{enumeration of possible expertises} 
+	\addnumbereddoublerow{}{AdtAddOrDelete: dtAddOrDelete}{boolean true if add and false if delete} 
+	\addnumbereddoublerow{}{AdtCoordinatorID: dtCoordinatorID}{serves the identification of an coordinator} 
+
+	\addrowheading{Return type}
+	\addsinglerow{ptBoolean}
+
+	\addrowheading{Pre-Condition (protocol)}
+	\addnumberedsinglerow{PreP}{the system is started}
+	\addnumberedsinglerow{PreP}{the actor logged previously and did not log out ! (i.e. the associated ctCoordinator instance is considered logged)}
+	\addnumberedsinglerow{PreP}{if the addordelete variable is false the has to be a matching association}
+		
+	\addrowheading{Pre-Condition (functional)}
+	\addnumberedsinglerow{PreF}{none}
+
+	\addrowheading{Post-Condition (functional)}
+	\addnumberedsinglerow{PostF}{An association of the Coordinator is either build or deleted}
+
+	\addrowheading{Post-Condition (protocol)}
+	\addnumberedsinglerow{PostP}{none}
+	\end{operationmodel}
+
+	\textbf{Example:}
+	\scriptsize
+	\lstset{language=PROLOG}
+	\begin{lstlisting}[firstnumber=auto,captionpos=b,caption=Example for \emph{oeSetCoordinatorExpertise} operation]
+	none
+	\end{lstlisting}
+	\normalsize
+
+
+	
+	
+	
+	
+
+
+
+
+

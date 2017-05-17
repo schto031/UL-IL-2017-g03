@@ -1,0 +1,71 @@
+\subsubsection{summary-suExpertiseLinking}
+
+\label{RE-use-case-suExpertiseLinking}
+
+
+
+
+\begin{usecase}
+  \addheading{Use-Case Description}
+  \addsingletwocolumnrow{Name}{suExpertiseLinking}
+  \addsingletwocolumnrow{Scope}{system}
+  \addsingletwocolumnrow{Level}{summary}
+  
+
+\addrowheading{Primary actor(s)}
+\addnumberedsinglerow{}{\msrcode{actCoordinator[active]}}
+
+
+\addrowheading{Secondary actor(s)}
+\addnumberedsinglerow{}{\msrcode{actComCompany[]}}
+
+\addrowheading{Goal(s) description}
+\addsinglerow{}
+
+\addrowheading{Reuse}
+\addnumberedsinglerow{}{\msrucname{ugSecurelyUseSystem [1..*]}}
+\addnumberedsinglerow{}{\msrucname{oeAlert [1..*]}}
+\addnumberedsinglerow{}{\msrucname{oeSetCrisisExpertis [1..*]}}
+\addnumberedsinglerow{}{\msrucname{oeGetCrisisSet [0..*]}}
+
+\addrowheading{Protocol condition(s)}
+\addnumberedsinglerow{}{
+}
+
+\addrowheading{Pre-condition(s)}
+\addnumberedsinglerow{}{
+}
+
+\addrowheading{Main post-condition(s)}
+\addnumberedsinglerow{}{
+}
+
+\addrowheading{Main Steps}
+\addalphanumberedsinglerow{}{the actor \msrcode{actCoordinator} executes the \msrucname{ugSecurelyUseSystem} use case}
+\addalphanumberedsinglerow{}{the actor \msrcode{actComCompany} executes the \msrucname{oeAlert} use case}
+\addalphanumberedsinglerow{}{the actor \msrcode{actCoordinator} executes the \msrucname{oeSetCrisisExpertis} use case}
+\addalphanumberedsinglerow{}{the actor \msrcode{actCoordinator} executes the \msrucname{oeGetCrisisSet} use case}
+\addrowheading{Steps Ordering Constraints}
+\addnumberedsinglerow{}{All the steps have to be executed successfully before the next step}
+
+\addrowheading{Additional Information}
+\addsinglerow{
+none
+}
+
+\end{usecase} 
+
+
+Figure \ref{fig:lu.uni.lassy.excalibur.examples.icrash-RE-UCD-uc-suExpertiseLinking}
+
+\begin{figure}[htbp]
+\begin{center}
+
+\includegraphics[
+angle=0
+]{./images-report-gen/usecase-model/summary/uc-suExpertiseLinking.eps}
+\end{center}
+\caption[lu.uni.lassy.excalibur.examples.icrash Use Case Diagram: uc-suExpertiseLinking]{}
+\label{fig:lu.uni.lassy.excalibur.examples.icrash-RE-UCD-uc-suExpertiseLinking}
+\end{figure}
+\vspace{0.5cm}

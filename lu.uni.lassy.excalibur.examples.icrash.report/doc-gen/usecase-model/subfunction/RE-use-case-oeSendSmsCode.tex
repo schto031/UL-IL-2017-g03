@@ -1,0 +1,45 @@
+\subsubsection{subfunction-oeSendSmsCode}
+
+\label{RE-use-case-oeSendSmsCode}
+
+
+The actor actComCompany sends an text message to the respective ActAuthenticated with his dtSmsCode used to validate the login 		  
+
+
+\begin{usecase}
+  \addheading{Use-Case Description}
+  \addsingletwocolumnrow{Name}{oeSendSmsCode}
+  \addsingletwocolumnrow{Scope}{system}
+  \addsingletwocolumnrow{Level}{subfunction}
+  
+
+\addrowheading{Primary actor(s)}
+\addnumberedsinglerow{}{\msrcode{actComCompany[active]}}
+
+
+
+\addrowheading{Goal(s) description}
+\addsinglerow{The actor actComCompany sends an text message to the respective ActAuthenticated with his dtSmsCode used to validate the login }
+
+\addrowheading{Protocol condition(s)}
+\addnumberedsinglerow{}{
+The iCrash system has been deployed.
+}
+
+\addrowheading{Pre-condition(s)}
+\addnumberedsinglerow{}{
+The actor actAuthenticated performed oeLogin successfully.
+}
+
+\addrowheading{Main post-condition(s)}
+\addnumberedsinglerow{}{
+The actor authenticated received an text message with his dtSmsCode needed to validate his login
+}
+
+\addrowheading{Additional Information}
+\addsinglerow{
+none
+}
+
+\end{usecase} 
+

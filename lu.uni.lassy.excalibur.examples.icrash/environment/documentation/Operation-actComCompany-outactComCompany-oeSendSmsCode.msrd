@@ -1,33 +1,33 @@
-/*
-@author Mikos
-@date Tue Mar 21 22:26:12 CET 2017
-*/
-
-
-@@Operation
-icrash.environment.actComCompany.outactComCompany.oeSendSmsCode
-//parameters
-@parameter
-icrash.environment.actComCompany.outactComCompany.oeSendSmsCode.AdtSmsCode
-""
-@endParameters
-
-@description "Used to send he generated Smscode to the actAuthenticated trying to log in"
-//preProtocol descriptions
-@preP
-" "
-@endPreP
-//preFunctional descriptions
-@preF
-" "
-@endPreF
-//postFunctional descriptions
-@postF 
-" "
-@endPostF
-//postProtocol descriptions
-@postP 
-" "
-@endPostP
-//example
-@example" "
+///*
+//@author Mikos
+//@date Tue Mar 21 22:26:12 CET 2017
+//*/
+//
+//
+//@@Operation
+//icrash.environment.actComCompany.outactComCompany.oeSendSmsCode
+////parameters
+//@parameter
+//icrash.environment.actComCompany.outactComCompany.oeSendSmsCode.AdtSmsCode
+//""
+//@endParameters
+//
+//@description "Used to send he generated Smscode to the actAuthenticated trying to log in"
+////preProtocol descriptions
+//@preP
+//" "
+//@endPreP
+////preFunctional descriptions
+//@preF
+//" "
+//@endPreF
+////postFunctional descriptions
+//@postF 
+//" "
+//@endPostF
+////postProtocol descriptions
+//@postP 
+//" "
+//@endPostP
+////example
+//@example" "

@@ -1,0 +1,10 @@
+/*
+@author peter
+@date Wed May 10 13:08:17 CEST 2017
+*/
+
+
+@@view uci-ucisuSMSValidation
+@instance Use-Case ucisuSMSValidation.ucisuSMSValidation
+@description ""
+@caption ""

@@ -1,0 +1,59 @@
+\subsubsection{summary-suSMSValidation}
+
+\label{RE-use-case-suSMSValidation}
+
+
+Used to validate the login by an sms based identification		  
+
+
+\begin{usecase}
+  \addheading{Use-Case Description}
+  \addsingletwocolumnrow{Name}{suSMSValidation}
+  \addsingletwocolumnrow{Scope}{system}
+  \addsingletwocolumnrow{Level}{summary}
+  
+
+\addrowheading{Primary actor(s)}
+\addnumberedsinglerow{}{\msrcode{actAuthenticated[active]}}
+
+
+\addrowheading{Secondary actor(s)}
+\addnumberedsinglerow{}{\msrcode{actActivator[active]}}
+\addnumberedsinglerow{}{\msrcode{actComCompany[proactive]}}
+
+\addrowheading{Goal(s) description}
+\addsinglerow{Used to validate the login by an sms based identification}
+
+\addrowheading{Reuse}
+\addnumberedsinglerow{}{\msrucname{oeLogin [1..*]}}
+\addnumberedsinglerow{}{\msrucname{oeGenerateSmsCode [1..*]}}
+\addnumberedsinglerow{}{\msrucname{oeSendSmsCode [1..*]}}
+\addnumberedsinglerow{}{\msrucname{oeSmsControl [1..*]}}
+
+\addrowheading{Protocol condition(s)}
+\addnumberedsinglerow{}{
+}
+
+\addrowheading{Pre-condition(s)}
+\addnumberedsinglerow{}{
+}
+
+\addrowheading{Main post-condition(s)}
+\addnumberedsinglerow{}{
+}
+
+\addrowheading{Main Steps}
+\addalphanumberedsinglerow{}{the actor \msrcode{actAuthenticated} executes the \msrucname{oeLogin} use case}
+\addalphanumberedsinglerow{}{the actor \msrcode{actActivator} executes the \msrucname{oeGenerateSmsCode} use case}
+\addalphanumberedsinglerow{}{the actor \msrcode{actComCompany} executes the \msrucname{oeSendSmsCode} use case}
+\addalphanumberedsinglerow{}{the actor \msrcode{actAuthenticated} executes the \msrucname{oeSmsControl} use case}
+\addrowheading{Steps Ordering Constraints}
+\addnumberedsinglerow{}{All the steps have to be executed successfully before the next step}
+
+\addrowheading{Additional Information}
+\addsinglerow{
+none
+}
+
+\end{usecase} 
+

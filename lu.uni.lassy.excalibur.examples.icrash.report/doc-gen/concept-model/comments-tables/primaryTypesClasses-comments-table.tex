@@ -8,6 +8,11 @@ The table below is providing comments on the graphical views given for the class
 \begin{datadictionary}
 \addheading{Classes}
 
+\adddoublerow{clExpertrises}{}
+\addsingletwocolumnrow{extends}{icrash.concepts.primarytypes.classes.ctCoordinator}
+\addsingletwocolumnrow{extends}{icrash.concepts.primarytypes.classes.ctCrisis}
+\adddoubletwocolumnrow{attribute}{\msrcode{Expertises: etExpertise}}{}
+\adddoubletwocolumnrow{operation}{\msrcode{init(Expertise:etExpertise):ptBoolean}}{}
 \adddoublerow{ctAdministrator}{used to caracterize internally the entity that is responsible of administrating the \msricrash system.}
 \addsingletwocolumnrow{extends}{icrash.concepts.primarytypes.classes.ctAuthenticated}
 \adddoubletwocolumnrow{operation}{\msrcode{init(Alogin:dtLogin, Apwd:dtPassword):ptBoolean}}{used to initialize the current object as a new instance of the ctAdministrator type.}
@@ -22,6 +27,7 @@ The table below is providing comments on the graphical views given for the class
 \adddoublerow{ctAuthenticated}{used to model system's representation about actors that need to authenticate to access some specific functionalities.}
 \adddoubletwocolumnrow{attribute}{\msrcode{login: dtLogin}}{an identifier for authentication.}
 \adddoubletwocolumnrow{attribute}{\msrcode{pwd: dtPassword}}{a key for authentication.}
+\adddoubletwocolumnrow{attribute}{\msrcode{smscode: dtSmsCode}}{used to confirm authentication}
 \adddoubletwocolumnrow{attribute}{\msrcode{vpIsLogged: ptBoolean}}{used to determine the access status.}
 \adddoubletwocolumnrow{operation}{\msrcode{init(Alogin:dtLogin, Apwd:dtPassword):ptBoolean}}{used to initialize the current object as a new instance of the ctAuthenticated type.}
 \adddoublerow{ctCoordinator}{used to model system's representation about the actors that have the responsibility to handle alerts and crisis.}

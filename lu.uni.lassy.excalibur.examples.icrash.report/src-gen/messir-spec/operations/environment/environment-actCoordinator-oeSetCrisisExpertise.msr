@@ -1,0 +1,55 @@
+package icrash.environment.operations.actCoordinator.outactCoordinator.oeSetCrisisExpertise {
+
+import lu.uni.lassy.messir.libraries.primitives
+import lu.uni.lassy.messir.libraries.math
+import lu.uni.lassy.messir.libraries.string
+import lu.uni.lassy.messir.libraries.calendar
+
+	Operation Model {
+
+		operation: icrash.environment.actCoordinator.outactCoordinator.oeSetCrisisExpertise(AdtCrisisID:icrash.concepts.primarytypes.datatypes.dtCrisisID, AdtExpertises:icrash.concepts.primarytypes.datatypes.etExpertise, AdtAddOrDelete:icrash.concepts.primarytypes.datatypes.dtAddOrDelete):ptBoolean{
+		// include below the specification information (pre,post or ocl or prolog)
+		preP{
+			  let TheSystem: icrash.concepts.primarytypes.classes.ctState in
+			  let TheActor:icrash.environment.actCoordinator in
+			  
+			  self.rnActor.rnSystem = TheSystem
+			  and self.rnActor = TheActor
+			  /* PreP01 */
+			  and TheSystem.vpStarted = true
+			  /* PreP02 */
+			  and TheActor.rnctAuthenticated.vpIsLogged = true
+			  }
+		preF{ let TheSystem: icrash.concepts.primarytypes.classes.ctState in
+			  let TheActor:icrash.environment.actCoordinator in
+			   
+			  self.rnActor.rnSystem = TheSystem
+			  and self.rnActor = TheActor
+			/* PreF01 */
+			  TheSystem.rnctCrisis->select(id.eq(AdtCrisisID))
+			  = CollectCrisis
+			  and CollectCrisis->size().eq(1)}
+		postF{
+			let TheSystem: icrash.concepts.primarytypes.classes.ctState in
+  			let ThectCrisis:icrash.concepts.primarytypes.classes.ctCrisis in
+  			let TheclExpertise:icrash.concepts.primarytypes.classes.clExpertrises in
+  			let AptStringMessageForTheActor:ptString in
+ 			self.rnActor.rnSystem = TheSystem
+  			and self.rnActor = TheActor
+  			TheSystem.rnctCrisis->select(id.eq(AdtCrisisID))
+			  = CollectCrisis
+  			if(AdtAddOrDelete and CollectCrisis.rnctExpertises->select(Expertises.eq(AdtExpertises))->isEmpty)
+  				then (CollectCrisis.rnclExpertises.init(AdtExpertises))
+			else if(AdtAddOrDelete and not CollectCrisis.rnctExpertises->select(Expertises.eq(AdtExpertises))->isEmpty)
+				then(.eq('this crisis instance already is linked to an instance of this crisis can therefore not be created'))
+			else if(not AdtAddOrDelete and CollectCrisis.rnctExpertises->select(Expertises.eq(AdtExpertises))->isEmpty)
+				then(.eq('this crisis instance is not linked to an instance of this crisis and can therefore not be deleted'))
+			else ( and CollectCrisis.rnclExpertises->select(Expertises.eq(AdtExpertises))(msrIsKilled))
+			endif
+			endif
+			endif
+			}
+		postP{true}
+		}
+	}
+}
