@@ -5,7 +5,7 @@
 
 
 @@Use Case icrash.usecases.suExpertiseLinking.suExpertiseLinking
-@description ""
+@description "The action to link crisis with an expertise requirement"
 @protocolCondition
 "
 "

@@ -4,5 +4,5 @@
 */
 
 
-@@Primary Type Association icrash.concepts.primarytypes.associations.relExpertiseReq
-@description ""
+@@Primary Type Association icrash.concepts.primarytypes.associations.assctExpertiseReq
+@description "this represents the connection between and expertise instance and a crisis instance"

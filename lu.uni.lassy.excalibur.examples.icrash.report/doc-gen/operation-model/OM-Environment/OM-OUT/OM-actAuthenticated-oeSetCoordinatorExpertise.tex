@@ -7,7 +7,7 @@ The \msrcode{oeSetCoordinatorExpertise} operation has the following properties:
 
 	\begin{operationmodel}
 	\addheading{Operation}
-	\adddoublerow{oeSetCoordinatorExpertise}{with this operation a new association is either build or deleted between a coordinator and an expertise field 
+	\adddoublerow{oeSetCoordinatorExpertise}{with this operation a new association is either build or deleted between a coordinator instance and an expertise field 
 	 }
 
 	\addrowheading{Parameters}
@@ -24,10 +24,15 @@ The \msrcode{oeSetCoordinatorExpertise} operation has the following properties:
 	\addnumberedsinglerow{PreP}{if the addordelete variable is false the has to be a matching association}
 		
 	\addrowheading{Pre-Condition (functional)}
-	\addnumberedsinglerow{PreF}{none}
+	\addnumberedsinglerow{PreF}{an instance of a coordinator with this CoordinatorID parameter exists}
 
 	\addrowheading{Post-Condition (functional)}
-	\addnumberedsinglerow{PostF}{An association of the Coordinator is either build or deleted}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is true and there is no instance of the expertise linked to the coordinator already existent a new instance is created and linked to this coordinator}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is false and if there exists an instance of that expertise linked to this coordinator this existing linked expertise is deleted}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is false and if there doesn't exists an instance of that expertise linked to this coordinator an error message is send to the actor 
+	indicating that the expertise he intended to delete doesn't exist for this coordinator}
+	\addnumberedsinglerow{PostF}{If the addordelete variable is true and there is instance of the expertise linked to the coordinator already existent an error message is send to the actor
+	indicating that the expertise he intended to link to the coordinator already exists for this coordinator}
 
 	\addrowheading{Post-Condition (protocol)}
 	\addnumberedsinglerow{PostP}{none}

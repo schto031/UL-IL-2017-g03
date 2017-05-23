@@ -4,5 +4,5 @@
 */
 
 
-@@Primary Type Association icrash.concepts.primarytypes.associations.relExpertise
-@description ""
+@@Primary Type Association icrash.concepts.primarytypes.associations.assctExpertise
+@description "this represents the connection between and expertise instance and a coordinator instance"

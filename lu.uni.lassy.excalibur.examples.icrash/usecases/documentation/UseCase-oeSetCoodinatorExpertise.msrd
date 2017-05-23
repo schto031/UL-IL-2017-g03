@@ -5,7 +5,7 @@
 
 
 @@Use Case Subfunction icrash.usecases.subfunctions.oeSetCoodinatorExpertise
-@description ""
+@description "with this operation an authentificated person is able to change the expertise domain a coordinator is fulfilling by linking/(deleting the link between) the instance of that coordinator with an expertise instance"
 @parameter icrash.usecases.subfunctions.oeSetCoodinatorExpertise.AdtExpertise ""
 @parameter icrash.usecases.subfunctions.oeSetCoodinatorExpertise.AdtAddOrDelete ""
 @endParameters
