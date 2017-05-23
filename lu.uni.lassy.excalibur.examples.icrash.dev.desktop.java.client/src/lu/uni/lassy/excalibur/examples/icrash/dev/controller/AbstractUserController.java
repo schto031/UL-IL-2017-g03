@@ -54,13 +54,11 @@ public abstract class AbstractUserController implements HasListeners {
 	 * @throws ServerOfflineException Thrown if the server is currently offline
 	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings
 	 */
-	public PtBoolean oeLogin(String login, String password, String smscode) throws ServerOfflineException, ServerNotBoundException{
+/*2*/	public PtBoolean oeLogin(String login, String password) throws ServerOfflineException, ServerNotBoundException{
 		DtLogin aDtLogin = new DtLogin(new PtString(login));
 		DtPassword aDtPassword = new DtPassword(new PtString(password));
-		DtPassword aDtSmsCode = new DtPassword(new PtString(smscode));
 		try {
-			return this.getAuth().oeLogin(aDtLogin, aDtPassword, aDtSmsCode);
-			
+			return this.getAuth().oeLogin(aDtLogin, aDtPassword);
 		} catch (RemoteException e) {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerOfflineException();
@@ -69,20 +67,22 @@ public abstract class AbstractUserController implements HasListeners {
 			throw new ServerNotBoundException();
 		}
 	}
-	
-	  public String oegenerateSmsCode(String login, String password){
-	  
-	 final Random RANDOM = new Random();
-        String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ0123456789";
 
-       String smscode = "";
-        for (int i = 0; i < 6; i++) {
-            int index = (int) (RANDOM.nextDouble() * letters.length());
-            smscode += letters.substring(index,index+1);
-           
-        }
-        return smscode;
-    }
+public PtBoolean oeSmscontrol(String login, String smscode) throws ServerOfflineException, ServerNotBoundException{
+	DtLogin aDtLogin = new DtLogin(new PtString(login));
+	DtPassword aDtPassword = new DtPassword(new PtString(smscode));
+	try {
+		return this.getAuth().oeSmscontrol(aDtLogin, aDtPassword);
+	} catch (RemoteException e) {
+		Log4JUtils.getInstance().getLogger().error(e);
+		throw new ServerOfflineException();
+	} catch (NotBoundException e) {
+		Log4JUtils.getInstance().getLogger().error(e);
+		throw new ServerNotBoundException();
+	}
+}
+	
+	
 	
 	/**
 	 * The method that allows the user to logoff.

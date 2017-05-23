@@ -87,7 +87,7 @@ public class CreatorGUIController extends AbstractGUIController{
 				if (numberOfCompCompanies < 1){
 					showWarningIncorrectData("Communication companies must be more than 0");
 				}else{
-					if (systemStatecontroller.createSystemAnEnviroment(new PtInteger(numberOfCompCompanies)).getValue()){
+					if (systemStatecontroller.createSystemAndEnvironment(new PtInteger(numberOfCompCompanies)).getValue()){
 						Screen screen = Screen.getPrimary();
 						Rectangle2D bounds = screen.getVisualBounds();
 						double rangeY = bounds.getMaxY() - bounds.getMinY();

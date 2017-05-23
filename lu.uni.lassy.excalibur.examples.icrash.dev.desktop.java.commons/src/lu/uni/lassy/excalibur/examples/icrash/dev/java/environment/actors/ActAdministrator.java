@@ -18,6 +18,7 @@ import java.rmi.RemoteException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 
 /**
@@ -31,12 +32,13 @@ public interface ActAdministrator extends ActAuthenticated {
 	 * @param aDtCoordinatorID The ID to use when creating the coordinator
 	 * @param aDtLogin The username to use when creating the coordinator
 	 * @param aDtPassword The password to use when creating the coordinator
+	 * @param aDtPhoneNumber 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
 	public PtBoolean oeAddCoordinator(DtCoordinatorID aDtCoordinatorID,
-			DtLogin aDtLogin, DtPassword aDtPassword) throws RemoteException,
+			DtLogin aDtLogin, DtPassword aDtPassword, DtPhoneNumber aDtPhoneNumber) throws RemoteException,
 			NotBoundException;
 
 	/**

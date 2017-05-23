@@ -67,7 +67,7 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAuthenticated#oeLogin(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword)
 	 */
-	synchronized public PtBoolean oeLogin(DtLogin aDtLogin,
+/*4*/	synchronized public PtBoolean oeLogin(DtLogin aDtLogin,
 			DtPassword aDtPassword) throws RemoteException, NotBoundException {
 
 		Logger log = Log4JUtils.getInstance().getLogger();
@@ -89,6 +89,31 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 
 		return res;
 	}
+
+
+/*new*/
+synchronized public PtBoolean oeSmscontrol(DtLogin aDtLogin,
+		DtPassword aDtsmscode) throws RemoteException, NotBoundException {
+
+	Logger log = Log4JUtils.getInstance().getLogger();
+
+	Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+	//Gathering the remote object as it was published into the registry
+	IcrashSystem iCrashSys_Server = (IcrashSystem) registry
+			.lookup("iCrashServer");
+
+	//set up ActAuthenticated instance that performs the request
+	iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+
+	log.info("message ActAuthenticated.oesmscontrol sent to system");
+	PtBoolean res = iCrashSys_Server.oeSmscontrol(aDtLogin, aDtsmscode);
+
+	if (res.getValue() == true)
+		log.info("operation oesmscontrol successfully executed by the system");
+
+	return res;
+}
 	
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAuthenticated#oeLogout()

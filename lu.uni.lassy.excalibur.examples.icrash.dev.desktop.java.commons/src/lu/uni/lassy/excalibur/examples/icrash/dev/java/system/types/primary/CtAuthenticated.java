@@ -15,6 +15,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary;
 import java.io.Serializable;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 
+
 /**
  * The Class CtAuthenticated, which is the base class that all users inherit from.
  */
@@ -25,6 +26,10 @@ public abstract class CtAuthenticated implements Serializable {
 	
 	/**  The user's username used to logon to the system with. */
 	public DtLogin login;
+	
+	public DtPhoneNumber phonenumber;
+	
+	public DtPassword smscode;
 	
 	/**  The user's password. */
 	public DtPassword pwd;
@@ -37,11 +42,13 @@ public abstract class CtAuthenticated implements Serializable {
 	 *
 	 * @param aLogin The username of the user
 	 * @param aPwd The password of the user
+	 * @param aDtPhoneNumber 
 	 * @return The success of the initialisation of the user
 	 */
-	public PtBoolean init(DtLogin aLogin, DtPassword aPwd){
+	public PtBoolean init(DtLogin aLogin, DtPassword aPwd, DtPhoneNumber aDtPhoneNumber){
 			login = aLogin;
 			pwd = aPwd;
+			phonenumber= aDtPhoneNumber;
 			vpIsLogged = new PtBoolean(false);
 			return new PtBoolean(true); 
 	}

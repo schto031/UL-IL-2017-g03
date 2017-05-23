@@ -49,7 +49,7 @@ public class SystemStateController {
 	 * @throws ServerOfflineException is an error that is thrown when the server is offline or not reachable
 	 * @throws ServerNotBoundException is only thrown when attempting to access a server which has no current binding. This shouldn't happen, but you never know!
 	 */
-	public PtBoolean createSystemAnEnviroment(PtInteger numberOfComCompanies)throws ServerOfflineException, ServerNotBoundException{
+	public PtBoolean createSystemAndEnvironment(PtInteger numberOfComCompanies)throws ServerOfflineException, ServerNotBoundException{
 		ActMsrCreator theCreator;
 		try {
 			IcrashEnvironment env = server.env();

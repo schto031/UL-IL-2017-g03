@@ -32,10 +32,11 @@ public class CtCoordinator extends CtAuthenticated {
 	 * @param aId The ID of the coordinator
 	 * @param aLogin The username of the coordinator
 	 * @param aPwd The password of the coordinator
+	 * @param aDtPhoneNumber 
 	 * @return The success of the initialisation
 	 */
-	public PtBoolean init(DtCoordinatorID aId,DtLogin aLogin,DtPassword aPwd){
-			super.init(aLogin, aPwd);
+	public PtBoolean init(DtCoordinatorID aId,DtLogin aLogin,DtPassword aPwd, DtPhoneNumber aDtPhoneNumber){
+			super.init(aLogin, aPwd,aDtPhoneNumber);
 			id = aId;
 			return new PtBoolean(true); 
 	}
@@ -47,9 +48,10 @@ public class CtCoordinator extends CtAuthenticated {
 	 * @param aPwd the value to change the password to 
 	 * @return the success of the update method
 	 */
-	public PtBoolean update(DtLogin aLogin,DtPassword aPwd){
+	public PtBoolean update(DtLogin aLogin,DtPassword aPwd,DtPhoneNumber aDtPhoneNumber){
 		login = aLogin;
 		pwd = aPwd;
+		phonenumber =aDtPhoneNumber;
 		return new PtBoolean(true);
 	}
 	

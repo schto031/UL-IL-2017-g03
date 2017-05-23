@@ -26,6 +26,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.Dt
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 
 /**
  * The Interface ActProxyComCompany that allows RMI access to the proxy actor on the client side.
@@ -66,5 +67,8 @@ public interface ActProxyComCompany extends Remote, JIntIsActor {
 	 * @throws RemoteException Thrown if the server is offline
 	 */
 	public PtBoolean ieSmsSend(DtPhoneNumber aDtPhoneNumber,DtSMS aDtSMS) throws RemoteException;
+
+	public PtBoolean ieMessage(PtString aMessage)throws RemoteException,NotBoundException;
+
 	
 }

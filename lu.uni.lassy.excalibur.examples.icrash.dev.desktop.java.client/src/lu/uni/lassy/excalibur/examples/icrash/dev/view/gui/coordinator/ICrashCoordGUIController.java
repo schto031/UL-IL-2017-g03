@@ -80,7 +80,6 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     @FXML
     private TextField txtfldCoordLogonUserName;
     
-    /** The textfield for entering in the SmsCode for logging on. */
     @FXML
     private TextField txtfldCoordSmsCode;
 
@@ -92,9 +91,8 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     @FXML
     private Button bttnCoordLogon;
     
-    /** The button that allows a user to initiate the logon function. */
     @FXML
-    private Button bttnCoordSmsIdentification;
+    private Button bttnSmsIdentification;
 
     /** The main tabpane that holds the normal user controls. */
     @FXML
@@ -195,7 +193,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     void bttnCoordLogon_OnClick(ActionEvent event) {
     	logon();
     }
-
+    @FXML
+    void bttnSmsIdentification_OnClick(ActionEvent event) {
+    	smscontrol();
+    }
     /**
      * Button event that deals with handling of a crisis
      *
@@ -242,6 +243,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	/** The user controller, for this GUI it's the coordinator controller and allows access to coordinator functions like reporting on crises. */
 	private CoordinatorController userController;
+
 	
 	/*
 	 * Other things created for this controller
@@ -419,54 +421,6 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		populateCrisis();
 	}
 	
-//	private void changeCrisisExperteises(){
-//		CtCrisis crisis = (CtCrisis)getObjectFromTableView(tblvwCrisis);
-//		if (crisis != null){
-//			Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
-//			dialog.setTitle("Change crisis Expertises");
-//			TextField txtfldCtCrisisID = new TextField();
-//			txtfldCtCrisisID.setText(crisis.id.value.getValue());
-//			txtfldCtCrisisID.setDisable(true);
-//			ComboBox<EtCrisisExpertises> cmbbx = new ComboBox<EtCrisisExpertises>();
-//			cmbbx.setItems( FXCollections.observableArrayList( EtCrisisStatus.values()));
-//			cmbbx.setValue(crisis.status);
-//			ButtonType bttntypAdd = new ButtonType("Add", ButtonData.YES);
-//			ButtonType bttntypDelete = new ButtonType("Delete", ButtonData.NO);
-//			ButtonType bttntypOK = new ButtonType("Change status", ButtonData.OK_DONE);
-//			ButtonType bttntypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-//			GridPane grdpn = new GridPane();
-//			grdpn.add(txtfldCtCrisisID, 1, 1);
-//			grdpn.add(cmbbx, 1, 2);
-//			dialog.getDialogPane().setContent(grdpn);
-//			dialog.getDialogPane().getButtonTypes().add(bttntypeCancel);
-//			dialog.getDialogPane().getButtonTypes().add(bttntypOK);
-//			dialog.setResultConverter(new Callback<ButtonType, PtBoolean>(){
-//				@Override
-//				public PtBoolean call(ButtonType param) {
-//					if (param.getButtonData() == ButtonData.OK_DONE && checkIfAllDialogHasBeenFilledIn(grdpn)){
-//						try {
-//							return userController.changeCrisisExpertises(crisis.id.value.getValue(), cmbbx.getValue());
-//						} catch (ServerOfflineException | ServerNotBoundException e) {
-//							showServerOffLineMessage(e);
-//						} catch (IncorrectFormatException e) {
-//							showWarningIncorrectInformationEntered(e);
-//						}
-//					}
-//					//User cancelled the dialog
-//					return new PtBoolean(true);
-//				}
-//			});
-//			dialog.initOwner(window);
-//			dialog.initModality(Modality.WINDOW_MODAL);
-//			Optional<PtBoolean> result = dialog.showAndWait();
-//			if (result.isPresent()){
-//				if (!result.get().getValue())
-//					showWarningMessage("Unable to change status of crisis", "Unable to change status of crisis, please try again");
-//			}
-//		}
-//		populateCrisis();
-//	}
-	
 	/**
 	 * Runs the function that will allow the current user to validate the selected alert.
 	 */
@@ -505,20 +459,39 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@Override
 	public void logon() {
-		//if(txtfldCoordLogonUserName.getText().length() > 0 && psswrdfldCoordLogonPassword.getText().length() > 0){
-			//try {
-				//if (userController.oeLogin(txtfldCoordLogonUserName.getText(), psswrdfldCoordLogonPassword.getText(),txtfldCoordSmsCode.getText()).getValue()){
-					//if (userController.getUserType() == UserType.Coordinator){
-						logonShowPanes(true);
-					//}
-				//}
-			//}
-			//catch (ServerOfflineException | ServerNotBoundException e) {
-			//	showExceptionErrorMessage(e);
-			//}
-    	//}
-    	//else
-    		//showWarningNoDataEntered();
+		if(txtfldCoordLogonUserName.getText().length() > 0 && psswrdfldCoordLogonPassword.getText().length() > 0){
+			try {
+				userController.oeLogin(txtfldCoordLogonUserName.getText(), psswrdfldCoordLogonPassword.getText()).getValue();
+					
+				
+			}
+			catch (ServerOfflineException | ServerNotBoundException e) {
+				showExceptionErrorMessage(e);
+			}
+    	}
+    	else
+    		showWarningNoDataEntered();
+	}
+	
+public void smscontrol() {
+		
+		
+		if(txtfldCoordLogonUserName.getText().length() > 0 && txtfldCoordSmsCode.getText().length() > 0){
+			
+			try {
+	/*1*/			if (userController.oeSmscontrol(txtfldCoordLogonUserName.getText(), txtfldCoordSmsCode.getText()).getValue()){
+		if (userController.getUserType() == UserType.Coordinator){
+			logonShowPanes(true);
+		}}
+				
+				
+			}
+			catch (ServerOfflineException | ServerNotBoundException e) {
+				showExceptionErrorMessage(e);
+			}	
+    	}
+    	else
+    		showWarningNoDataEntered();
 	}
 
 	/* (non-Javadoc)
@@ -551,6 +524,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		else{
 			txtfldCoordLogonUserName.setText("");
 			psswrdfldCoordLogonPassword.setText("");
+			txtfldCoordSmsCode.setText("");
 			txtfldCoordLogonUserName.requestFocus();
 			
 		}

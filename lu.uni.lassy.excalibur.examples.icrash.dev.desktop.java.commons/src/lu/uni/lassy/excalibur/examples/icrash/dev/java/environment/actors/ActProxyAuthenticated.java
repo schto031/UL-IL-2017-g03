@@ -42,12 +42,11 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	 *
 	 * @param aDtLogin The username to logon with
 	 * @param aDtPassword The password to logon with
-	 * @param aDtSmssCode 
 	 * @return The success of the operation
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeLogin(DtLogin aDtLogin, DtPassword aDtPassword, DtPassword aDtSmsCode )
+	public PtBoolean oeLogin(DtLogin aDtLogin, DtPassword aDtPassword)
 			throws RemoteException, NotBoundException;
 
 	/**
@@ -96,5 +95,6 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	 * @throws RemoteException the remote exception
 	 */
 	public UserType getUserType() throws RemoteException;
+	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtPassword) throws RemoteException, NotBoundException;
 	
 }

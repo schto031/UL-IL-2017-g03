@@ -29,6 +29,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.Dt
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.RmiUtils;
 
@@ -181,5 +182,22 @@ public class ActComCompanyImpl extends UnicastRemoteObject implements ActComComp
 		if (!this.getName().equals(aActComCompany.getName()))
 			return false;
 		return true;
+	}
+	@Override
+	public PtBoolean ieMessage(PtString aMessage) {
+		Logger log = Log4JUtils.getInstance().getLogger();
+		log.info("message ActAuthenticated.ieMessage received from system");
+		log.info("ieMessage is: " + aMessage.getValue());
+		//log.info("Message being sent to " + this._name);
+		for (Iterator<ActProxyComCompany> iterator = listeners.iterator(); iterator.hasNext();) {
+			ActProxyComCompany aProxy = iterator.next();
+			try {
+				aProxy.ieMessage(aMessage);
+			} catch (RemoteException | NotBoundException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				iterator.remove();
+			}
+		}
+		return new PtBoolean(true);
 	}
 }

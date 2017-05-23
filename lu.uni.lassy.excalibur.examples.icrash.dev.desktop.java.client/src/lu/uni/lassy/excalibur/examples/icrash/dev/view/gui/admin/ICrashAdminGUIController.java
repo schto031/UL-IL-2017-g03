@@ -11,6 +11,7 @@
  *     Thomas Mortimer - Updated client to MVC and added new design patterns
  ******************************************************************************/
 package lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin;
+
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -67,22 +68,21 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     /** The textfield that allows input of a username for logon. */
     @FXML
     private TextField txtfldAdminUserName;
+
     
-    /** The textfield that allows input of a Sms Code for logon. */
     @FXML
     private TextField txtfldSmsCode;
     /** The passwordfield that allows input of a password for logon. */
+  
     @FXML
     private PasswordField psswrdfldAdminPassword;
 
     /** The button that initiates the login function. */
     @FXML
     private Button bttnAdminLogin;
-
-    /** The button that initiates the Sms validation function. */
-    @FXML
-    private Button bttnSmsCode;
     
+   
+
     /** The borderpane that contains the normal controls the user will use. */
     @FXML
     private BorderPane brdpnAdmin;
@@ -98,7 +98,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     /** The button that shows the controls for deleting a coordinator */
     @FXML
     private Button bttnBottomAdminCoordinatorDeleteACoordinator;
-
+    @FXML
+    private Button bttnSmsCode;
     /** The tableview of the recieved messages from the system */
     @FXML
     private TableView<Message> tblvwAdminMessages;
@@ -134,28 +135,16 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      */
     @FXML
     void bttnBottomLoginPaneLogin_OnClick(ActionEvent event) {
-    	generateSmsCode();
+    	logon();
     }
+
     
-    private void generateSmsCode() {
-    	if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0 ){
-    		String Login = txtfldAdminUserName.getText();
-    		String Pw = psswrdfldAdminPassword.getText();
-    		txtfldSmsCode.setText(userController.oegenerateSmsCode(Login, Pw));
-				
-			}
-		
-	}
 
 	@FXML
     void bttnSmsIdentification_OnClick(ActionEvent event) {
-    	logon();
+    	smscontrol();
     }
     
-    
-    
-    
-
     /**
      * The button event that will initiate the logging off of a user
      *
@@ -210,6 +199,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		if (!loggedOn){
 			txtfldAdminUserName.setText("");
 			psswrdfldAdminPassword.setText("");
+			txtfldSmsCode.setText("");
 			txtfldAdminUserName.requestFocus();
 			for (int i = anchrpnCoordinatorDetails.getChildren().size() -1; i >= 0; i--)
 				anchrpnCoordinatorDetails.getChildren().remove(i);
@@ -244,6 +234,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			anchrpnCoordinatorDetails.getChildren().remove(i);
 		TextField txtfldUserID = new TextField();
 		TextField txtfldUserName = new TextField();
+		TextField txtfldPhoneNumber= new TextField();
 		PasswordField psswrdfldPassword = new PasswordField();
 		txtfldUserID.setPromptText("User ID");
 		Button bttntypOK = null;
@@ -253,10 +244,12 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		case Add:
 			bttntypOK = new Button("Create");
 			txtfldUserName.setPromptText("User name");
+			txtfldPhoneNumber.setPromptText("Phonenumber");
 			psswrdfldPassword.setPromptText("Password");
 			grdpn.add(txtfldUserName, 1, 2);
-			grdpn.add(psswrdfldPassword, 1, 3);
-			grdpn.add(bttntypOK, 1, 4);
+			grdpn.add(psswrdfldPassword, 1, 4);
+			grdpn.add(txtfldPhoneNumber, 1, 3);
+			grdpn.add(bttntypOK, 1, 5);
 			break;
 		case Delete:
 			bttntypOK = new Button("Delete");
@@ -274,7 +267,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 						DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
 						switch(type){
 						case Add:
-							if (userController.oeAddCoordinator(txtfldUserID.getText(), txtfldUserName.getText(), psswrdfldPassword.getText()).getValue()){
+	/*1*/			if (userController.oeAddCoordinator(txtfldUserID.getText(), txtfldUserName.getText(), psswrdfldPassword.getText(),txtfldPhoneNumber.getText()).getValue()){
 								listOfOpenWindows.add(new CreateICrashCoordGUI(coordID, systemstateController.getActCoordinator(txtfldUserName.getText())));
 								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
 							}
@@ -312,19 +305,43 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@Override
 	public void logon() {
-		if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0 && txtfldSmsCode.getText().length() > 0){
+		
+		
+		if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0){
+			
 			try {
-				if (userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText(), txtfldSmsCode.getText()).getValue())
-					logonShowPanes(true);
+	/*1*/		userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText()).getValue();
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);
 			}	
-   	}
-   	else
+    	}
+    	else
     		showWarningNoDataEntered();
 	}
 
+public void smscontrol() {
+		
+		
+		if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0){
+			
+			try {
+	/*1*/			if (userController.oeSmscontrol(txtfldAdminUserName.getText(), txtfldSmsCode.getText()).getValue())
+					logonShowPanes(true);
+				
+				
+			}
+			catch (ServerOfflineException | ServerNotBoundException e) {
+				showExceptionErrorMessage(e);
+			}	
+    	}
+    	else
+    		showWarningNoDataEntered();
+	}
+	
+
+
+	
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController#logoff()
 	 */
@@ -359,6 +376,14 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public PtBoolean setActor(JIntIsActor actor) {
 		try {

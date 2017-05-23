@@ -24,7 +24,6 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAl
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
@@ -332,12 +331,5 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		if(res.getValue() == true)
 			log.info("operation oeGetAlertsSet successfully executed by the system");
 		return res;
-	}
-
-	@Override
-	public PtBoolean oeLogin(DtLogin aDtLogin, DtPassword aDtPassword, DtPassword aDtSmsCode)
-			throws RemoteException, NotBoundException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

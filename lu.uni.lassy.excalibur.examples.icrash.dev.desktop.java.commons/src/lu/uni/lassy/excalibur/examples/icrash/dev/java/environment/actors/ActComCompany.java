@@ -25,6 +25,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.Dt
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 
 /**
  * The Interface ActComCompany.
@@ -83,4 +84,8 @@ public interface ActComCompany extends java.rmi.Remote, Serializable, JIntIsActo
 	 * @throws NotBoundException Thrown if the server is not bound correctly in RMI settings
 	 */
 	public void removeListener(ActProxyComCompany aActProxyAuthenticated) throws RemoteException, NotBoundException;
+
+	public PtBoolean ieMessage(PtString aMessage)throws RemoteException, NotBoundException;
+
+	
 }

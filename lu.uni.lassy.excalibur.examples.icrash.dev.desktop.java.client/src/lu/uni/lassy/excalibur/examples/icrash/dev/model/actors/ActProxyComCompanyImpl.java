@@ -16,7 +16,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntHasServerSideActor;
@@ -28,6 +27,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.Dt
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.RmiUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
@@ -143,5 +143,16 @@ public class ActProxyComCompanyImpl extends UnicastRemoteObject implements
 			return false;
 		return true;
 	}
+
+	@Override
+	public PtBoolean ieMessage(PtString aMessage) {
+		Logger log = Log4JUtils.getInstance().getLogger();
+		log.info("message ActAuthenticated.ieMessage received from system");
+		log.info("ieMessage is: " + aMessage.getValue());
+		listOfMessages.add(new Message(MessageType.ieMessage, aMessage.getValue()));
+		return new PtBoolean(true);
+	}
+
+	
 	
 }
