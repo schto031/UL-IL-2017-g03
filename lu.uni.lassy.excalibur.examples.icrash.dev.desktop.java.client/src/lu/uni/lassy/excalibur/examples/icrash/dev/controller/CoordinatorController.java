@@ -27,6 +27,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
@@ -75,6 +76,11 @@ public class CoordinatorController extends AbstractUserController {
 			}
 		}
 		return new PtBoolean(false);
+	}
+	//edit this Peter
+	public PtBoolean setCrisisExpertise(String crisisID, EtExpertise expertise,boolean addorDelete)
+	{
+		return new PtBoolean(true);
 	}
 	/**
 	 * Takes an crisis that exists in the system and assign it to the current logged in user.

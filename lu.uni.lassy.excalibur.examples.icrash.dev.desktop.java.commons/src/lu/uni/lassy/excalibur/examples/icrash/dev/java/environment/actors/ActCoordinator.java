@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAddOrDelete;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
@@ -140,5 +141,18 @@ public interface ActCoordinator extends ActAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 */
 	public PtBoolean ieSendAnAlert(CtAlert aCtAlert) throws RemoteException;
+	
+	/**
+	 * Sets the crisis' expertise, with the ID passed, to the type passed.
+	 *
+	 * @param aDtCrisisID The ID of the crisis to change the status of
+	 * @param aEtExpertise The type expertise
+	 * @param 
+	 * @return The success of the method
+	 * @throws RemoteException Thrown if the server is offline
+	 * @throws NotBoundException Thrown if the server has not been bound correctly in the RMI settings
+	 */
+	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtCrisisType aEtCrisisType,DtAddOrDelete adtAddOrDelete) throws RemoteException, NotBoundException;
+	
 
 }
