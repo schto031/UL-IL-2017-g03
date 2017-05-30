@@ -248,13 +248,7 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 			return ((ActCoordinator) getServerSideActor()).oeSetCoordinatorExpertise(aDtLogin, aEtExpertise, ptBoolean);
 		else
 			return new PtBoolean(false);	}
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis)
-	{
-		return getServerSideActor().getExpertiseByCrisis(aCtCrisis);
-	}
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator)
-	{
-		return getServerSideActor().getExpertiseByCoordinator(aCtCoordinator);
-	}
+
+
 
 }

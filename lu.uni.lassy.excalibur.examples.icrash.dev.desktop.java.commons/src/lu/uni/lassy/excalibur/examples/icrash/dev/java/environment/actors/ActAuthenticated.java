@@ -88,9 +88,6 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 
 	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtsmscode) throws RemoteException, NotBoundException;
 
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis);
-
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator);
 	
 	
 }

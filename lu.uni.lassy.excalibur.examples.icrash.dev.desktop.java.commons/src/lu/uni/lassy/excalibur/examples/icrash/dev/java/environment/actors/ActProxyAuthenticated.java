@@ -102,6 +102,4 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	public UserType getUserType() throws RemoteException;
 	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtPassword) throws RemoteException, NotBoundException;
 	public PtBoolean setCoordinatorExpertise(DtLogin aDtLogin, EtExpertise ex, PtBoolean ptBoolean) throws RemoteException, NotBoundException;
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis);
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator);
 }

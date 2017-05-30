@@ -384,9 +384,6 @@ public interface IcrashSystem extends Remote {
 	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtExpertise aEtExpertise, PtBoolean adtAddOrDelete)throws RemoteException;
 
 	public PtBoolean oeSetCoordinatorExpertise(DtLogin aDtLogin, EtExpertise aEtExpertise, PtBoolean ptBoolean) throws RemoteException;
-	
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis);
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator);
 
 	 
 

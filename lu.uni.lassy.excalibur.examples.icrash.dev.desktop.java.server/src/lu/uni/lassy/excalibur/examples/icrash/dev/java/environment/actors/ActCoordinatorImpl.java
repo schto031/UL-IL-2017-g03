@@ -372,13 +372,6 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 			log.info("operation oeSetCoordinatorExpertise successfully executed by the system");
 		return res;
 	}
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis)
-	{
-		return getExpertiseByCrisis(aCtCrisis);
-	}
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator)
-	{
-		return getExpertiseByCoordinator(aCtCoordinator);
-	}
+
 
 }

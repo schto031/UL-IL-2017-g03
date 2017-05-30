@@ -166,16 +166,5 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		return new PtBoolean(true);
 	}
 
-	@Override
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

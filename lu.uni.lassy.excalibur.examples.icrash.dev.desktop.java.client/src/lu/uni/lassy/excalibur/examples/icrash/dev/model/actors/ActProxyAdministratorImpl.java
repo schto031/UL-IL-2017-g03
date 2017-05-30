@@ -120,15 +120,5 @@ public class ActProxyAdministratorImpl extends ActProxyAuthenticatedImpl impleme
 		else
 			return new PtBoolean(false);	}
 
-	@Override
-	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
