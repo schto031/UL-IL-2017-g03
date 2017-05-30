@@ -19,25 +19,15 @@ package ucisuSMSValidation {
               
              icrash.usecases.subfunctions.oeLogin("icrashadmin","7WXC1359")
              {ieMessage("SmsCode sent") returned to bill
-             	
+             	ieMessage("SmsCode:ABC123,Phonenumber:621112233") returned to tango
              }
              
-         main
-         executed instanceof subfunction
-         
-         icrash.usecases.subfunctions.oeGenerateSmsCode()
-             {ieMessage("ABC123") returned to tango
-             	
-             }
-  		tango 
-   		executed instanceof subfunction
-   		
-			icrash.usecases.subfunctions.oeSendSmsCode("ABC123")
+        
 			
 			
 			bill
 			executed instanceof subfunction
-			icrash.usecases.subfunctions.oeSmsControl("ABC123")
+			icrash.usecases.subfunctions.oeSmsControl("icrashadmin","ABC123")
 			{ieMessage("Successfully Logged in") returned to bill
              	
              }

@@ -152,12 +152,10 @@ use case system subfunction oeSetCoodinatorExpertise (AdtExpertise:etExpertise,A
 				ieMessage(AMessage) returned to actCoordinator
 			}
 		}
-			use case system subfunction oeSmsControl(AdtSmsCode:dtSmsCode) {
+			use case system subfunction oeSmsControl(Adtlogin:dtLogin,AdtSmsCode:dtSmsCode) {
 			actor actAuthenticated[primary, active]
 		}
-	use case system subfunction oeSendSmsCode() {
-			actor actComCompany[primary, active]
-		}
+	
 	}
 
 }
