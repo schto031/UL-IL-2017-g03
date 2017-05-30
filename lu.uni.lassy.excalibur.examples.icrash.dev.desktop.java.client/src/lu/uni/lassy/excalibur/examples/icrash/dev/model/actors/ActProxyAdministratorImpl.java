@@ -14,12 +14,19 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.model.actors;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.List;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAdministrator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
@@ -103,5 +110,25 @@ public class ActProxyAdministratorImpl extends ActProxyAuthenticatedImpl impleme
 	@Override
 	public PtBoolean oeLogout() throws RemoteException, NotBoundException {
 		return super.oeLogout();
+	}
+
+	@Override
+	public PtBoolean setCoordinatorExpertise(DtLogin aDtLogin, EtExpertise ex, PtBoolean ptBoolean)
+			throws RemoteException, NotBoundException  {
+		if (getServerSideActor() != null)
+			return ((ActCoordinator) getServerSideActor()).oeSetCoordinatorExpertise(aDtLogin, ex, ptBoolean);
+		else
+			return new PtBoolean(false);	}
+
+	@Override
+	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

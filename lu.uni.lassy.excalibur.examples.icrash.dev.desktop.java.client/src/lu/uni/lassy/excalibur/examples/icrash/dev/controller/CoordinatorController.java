@@ -19,12 +19,15 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.Incorrec
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIs;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
@@ -78,9 +81,24 @@ public class CoordinatorController extends AbstractUserController {
 		return new PtBoolean(false);
 	}
 	//edit this Peter
-	public PtBoolean setCrisisExpertise(String crisisID, EtExpertise expertise,boolean addorDelete)
+	public PtBoolean setCrisisExpertise(String crisisID, EtExpertise expertise,PtBoolean ptBoolean) throws ServerOfflineException, ServerNotBoundException,IncorrectFormatException
 	{
-		return new PtBoolean(true);
+		DtCrisisID aDtCrisisID = new DtCrisisID(new PtString(crisisID));
+		Hashtable<JIntIs, String> ht = new Hashtable<JIntIs, String>();
+		ht.put(aDtCrisisID, aDtCrisisID.value.getValue());
+		if (this.getUserType() == UserType.Coordinator){
+			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
+			try {
+				return actCoord.setCrisisExpertise(aDtCrisisID,expertise, ptBoolean);
+			} catch (RemoteException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerOfflineException();
+			} catch (NotBoundException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerNotBoundException();
+			}
+		}
+		return new PtBoolean(false);
 	}
 	/**
 	 * Takes an crisis that exists in the system and assign it to the current logged in user.
@@ -233,11 +251,11 @@ public class CoordinatorController extends AbstractUserController {
 	 * @throws ServerOfflineException Thrown if the server is offline
 	 * @throws ServerNotBoundException Thrown if the server is not bound
 	 */
-	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus) throws ServerOfflineException, ServerNotBoundException{
+	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus,DtLogin aDtLogin) throws ServerOfflineException, ServerNotBoundException{
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeGetCrisisSet(aEtCrisisStatus);
+				return actCoord.oeGetCrisisSet(aEtCrisisStatus,aDtLogin);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();
@@ -263,6 +281,24 @@ public class CoordinatorController extends AbstractUserController {
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
 				return actCoord.oeGetAlertsSet(aEtAlertStatus);
+			} catch (RemoteException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerOfflineException();
+			} catch (NotBoundException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerNotBoundException();
+			}
+		}
+		return new PtBoolean(false);
+	}
+	public PtBoolean setCoordinatorExpertise(String id, EtExpertise ex, PtBoolean ptBoolean)throws ServerOfflineException, ServerNotBoundException,IncorrectFormatException {
+		DtLogin aDtLogin = new DtLogin(new PtString(id));
+		Hashtable<JIntIs, String> ht = new Hashtable<JIntIs, String>();
+		ht.put(aDtLogin, aDtLogin.value.getValue());
+		if (this.getUserType() == UserType.Coordinator){
+			ActProxyAuthenticated actAuth = this.getAuth();
+			try {
+				return actAuth.setCoordinatorExpertise(aDtLogin,ex, ptBoolean);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();

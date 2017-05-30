@@ -17,8 +17,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Iterator;
+import java.util.List;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -160,6 +164,18 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 			}
 		}
 		return new PtBoolean(true);
+	}
+
+	@Override
+	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

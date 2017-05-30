@@ -23,12 +23,14 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.Incorrec
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
@@ -166,9 +168,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
      * Button event that deals with changing the status of a crisis
      *
      * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
      */
     @FXML
-    void bttnChangeStatusCrisis_OnClick(ActionEvent event) {
+    void bttnChangeStatusCrisis_OnClick(ActionEvent event) throws RemoteException {
     	changeCrisisStatus();
     }
     //Peter
@@ -176,27 +179,30 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
      * Button event that deals with changing the expertise of a crisis
      *
      * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
      */
     @FXML
-    void bttnChangeExpertiseCrisis_OnClick(ActionEvent event) {
+    void bttnChangeExpertiseCrisis_OnClick(ActionEvent event) throws RemoteException {
     	setCrisisExpertise();
     }
     /**
      * Button event that deals with changing the status of a crisis
      *
      * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
      */
-//    @FXML
-//    void bttnSetCoordinatorExpertise_OnClick(ActionEvent event) {
-//    	setCoordinatorExpertise();
-//    }
+    @FXML
+    void bttnSetCoordinatorExpertise_OnClick(ActionEvent event) throws RemoteException {
+    	setCoordinatorExpertise();
+    }
     /**
      * Button event that deals with closing a crisis
      *
      * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
      */
     @FXML
-    void bttnCloseCrisis_OnClose(ActionEvent event) {
+    void bttnCloseCrisis_OnClose(ActionEvent event) throws RemoteException {
     	closeCrisis();
     }
 
@@ -227,9 +233,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
      * Button event that deals with handling of a crisis
      *
      * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
      */
     @FXML
-    void bttnHandleCrisis_OnClick(ActionEvent event) {
+    void bttnHandleCrisis_OnClick(ActionEvent event) throws RemoteException {
     	handleCrisis();
     }
 
@@ -247,9 +254,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
      * Button event that deals with reportinng on a crisis
      *
      * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
      */
     @FXML
-    void bttnReportCrisis_OnClick(ActionEvent event) {
+    void bttnReportCrisis_OnClick(ActionEvent event) throws RemoteException {
     	reportOnCrisis();
     }
 
@@ -293,10 +301,13 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	/**
 	 * Populates the tableview with a list of crisis that have the same status as the one provided.
+	 * @throws RemoteException 
 	 */
-	private void populateCrisis(){
+	private void populateCrisis() throws RemoteException{
 		try {
-			userController.oeGetCrisisSet(cmbbxCrisisStatus.getValue());
+			ActCoordinator cord=(ActCoordinator)actor;
+			DtLogin login=cord.getLogin();
+			userController.oeGetCrisisSet(cmbbxCrisisStatus.getValue(),login);
 		} catch (ServerOfflineException | ServerNotBoundException e) {
 			showServerOffLineMessage(e);
 		}
@@ -315,8 +326,9 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	/**
 	 * Runs the function that will allow the current user to handle the selected crisis.
+	 * @throws RemoteException 
 	 */
-	private void handleCrisis(){
+	private void handleCrisis() throws RemoteException{
 		CtCrisis crisis = (CtCrisis)getObjectFromTableView(tblvwCrisis);
 		if (crisis != null){
 			try {
@@ -333,8 +345,9 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	/**
 	 * Runs the function that will allow the current user to close the selected crisis.
+	 * @throws RemoteException 
 	 */
-	private void closeCrisis(){
+	private void closeCrisis() throws RemoteException{
 		CtCrisis crisis = (CtCrisis)getObjectFromTableView(tblvwCrisis);
 		if (crisis != null)
 		{
@@ -351,8 +364,9 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	/**
 	 * Runs the function that will allow the current user to report on the selected crisis.
+	 * @throws RemoteException 
 	 */
-	private void reportOnCrisis(){
+	private void reportOnCrisis() throws RemoteException{
 		CtCrisis crisis = (CtCrisis)getObjectFromTableView(tblvwCrisis);
 		if (crisis != null)
 		{
@@ -400,8 +414,9 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	/**
 	 * Runs the function that will allow the current user to change the selected crisis' status.
+	 * @throws RemoteException 
 	 */
-	private void changeCrisisStatus(){
+	private void changeCrisisStatus() throws RemoteException{
 		CtCrisis crisis = (CtCrisis)getObjectFromTableView(tblvwCrisis);
 		if (crisis != null){
 			Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
@@ -446,7 +461,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		}
 		populateCrisis();
 	}
-	private void setCrisisExpertise(){
+	private void setCrisisExpertise() throws RemoteException{
 		CtCrisis crisis = (CtCrisis)getObjectFromTableView(tblvwCrisis);
 		if (crisis != null){
 			Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
@@ -470,22 +485,22 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 				@Override
 				public PtBoolean call(ButtonType param) {
 					if (param.getButtonData() == ButtonData.YES && checkIfAllDialogHasBeenFilledIn(grdpn)){
-//						try {
-							return userController.setCrisisExpertise(crisis.id.value.getValue(), cmbbx.getValue(),true);
-//						} catch (ServerOfflineException | ServerNotBoundException e) {
-//							showServerOffLineMessage(e);
-//						} catch (IncorrectFormatException e) {
-//							showWarningIncorrectInformationEntered(e);
-//						}
+						try {
+							return userController.setCrisisExpertise(crisis.id.value.getValue(), cmbbx.getValue(),new PtBoolean(true));
+						} catch (ServerOfflineException | ServerNotBoundException e) {
+							showServerOffLineMessage(e);
+						} catch (IncorrectFormatException e) {
+							showWarningIncorrectInformationEntered(e);
+						}
 					}
 					else if (param.getButtonData() == ButtonData.NO && checkIfAllDialogHasBeenFilledIn(grdpn)){
-//						try {
-							return userController.setCrisisExpertise(crisis.id.value.getValue(), cmbbx.getValue(),false);
-//						} catch (ServerOfflineException | ServerNotBoundException e) {
-//							showServerOffLineMessage(e);
-//						} catch (IncorrectFormatException e) {
-//							showWarningIncorrectInformationEntered(e);
-//						}
+						try {
+							return userController.setCrisisExpertise(crisis.id.value.getValue(), cmbbx.getValue(),new PtBoolean(false));
+						} catch (ServerOfflineException | ServerNotBoundException e) {
+							showServerOffLineMessage(e);
+						} catch (IncorrectFormatException e) {
+							showWarningIncorrectInformationEntered(e);
+						}
 					}
 					//User cancelled the dialog
 					return new PtBoolean(true);
@@ -501,59 +516,62 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		}
 		populateCrisis();
 	}
-//	private void setCoordinatorExpertise(){
-//			Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
-//			dialog.setTitle("Change the crisis expertise");
-//			TextField txtfldCtCrisisID = new TextField();
-//			txtfldCtCrisisID.setText(crisis.id.value.getValue());
-//			txtfldCtCrisisID.setDisable(true);
-//			ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
-//			cmbbx.setItems( FXCollections.observableArrayList( EtExpertise.values()));
-//			ButtonType bttntypAdd = new ButtonType("Add expertise", ButtonData.YES);
-//			ButtonType bttntypRemove = new ButtonType("Remove expertise", ButtonData.NO);
-//			ButtonType bttntypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-//			GridPane grdpn = new GridPane();
-//			grdpn.add(txtfldCtCrisisID, 1, 1);
-//			grdpn.add(cmbbx, 1, 2);
-//			dialog.getDialogPane().setContent(grdpn);
-//			dialog.getDialogPane().getButtonTypes().add(bttntypeCancel);
-//			dialog.getDialogPane().getButtonTypes().add(bttntypAdd);
-//			dialog.getDialogPane().getButtonTypes().add(bttntypRemove);
-//			dialog.setResultConverter(new Callback<ButtonType, PtBoolean>(){
-//				@Override
-//				public PtBoolean call(ButtonType param) {
-//					if (param.getButtonData() == ButtonData.YES && checkIfAllDialogHasBeenFilledIn(grdpn)){
-////						try {
-//							return userController.setCrisisExpertise(crisis.id.value.getValue(), cmbbx.getValue(),true);
-////						} catch (ServerOfflineException | ServerNotBoundException e) {
-////							showServerOffLineMessage(e);
-////						} catch (IncorrectFormatException e) {
-////							showWarningIncorrectInformationEntered(e);
-////						}
-//					}
-//					else if (param.getButtonData() == ButtonData.NO && checkIfAllDialogHasBeenFilledIn(grdpn)){
-////						try {
-//							return userController.setCrisisExpertise(crisis.id.value.getValue(), cmbbx.getValue(),false);
-////						} catch (ServerOfflineException | ServerNotBoundException e) {
-////							showServerOffLineMessage(e);
-////						} catch (IncorrectFormatException e) {
-////							showWarningIncorrectInformationEntered(e);
-////						}
-//					}
-//					//User cancelled the dialog
-//					return new PtBoolean(true);
-//				}
-//			});
-//			dialog.initOwner(window);
-//			dialog.initModality(Modality.WINDOW_MODAL);
-//			Optional<PtBoolean> result = dialog.showAndWait();
-//			if (result.isPresent()){
-//				if (!result.get().getValue())
-//					showWarningMessage("Unable to change expertise of crisis", "Unable to change expertise of crisis, please try again");
-//			}
-//		}
-//		populateCrisis();
-//	}
+	private void setCoordinatorExpertise() throws RemoteException {
+			Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
+			dialog.setTitle("Change the coordinator expertise");
+			TextField txtfldCtCrisisID = new TextField();
+			ActCoordinator cord=(ActCoordinator)actor;
+			DtLogin login=cord.getLogin();
+			txtfldCtCrisisID.setText(login.value.getValue());
+			txtfldCtCrisisID.setDisable(true);
+			ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
+			cmbbx.setItems( FXCollections.observableArrayList( EtExpertise.values()));
+			ButtonType bttntypAdd = new ButtonType("Add expertise", ButtonData.YES);
+			ButtonType bttntypRemove = new ButtonType("Remove expertise", ButtonData.NO);
+			ButtonType bttntypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+			GridPane grdpn = new GridPane();
+			grdpn.add(txtfldCtCrisisID, 1, 1);
+			grdpn.add(cmbbx, 1, 2);
+			dialog.getDialogPane().setContent(grdpn);
+			dialog.getDialogPane().getButtonTypes().add(bttntypeCancel);
+			dialog.getDialogPane().getButtonTypes().add(bttntypAdd);
+			dialog.getDialogPane().getButtonTypes().add(bttntypRemove);
+			dialog.setResultConverter(new Callback<ButtonType, PtBoolean>(){
+				@Override
+				public PtBoolean call(ButtonType param) {
+					if (param.getButtonData() == ButtonData.YES && checkIfAllDialogHasBeenFilledIn(grdpn)){
+//						try {
+							//return userController.setCoordinatorExpertise(login.value.getValue(), cmbbx.getValue(),new PtBoolean(true));
+							System.out.println("yes");
+//						} catch (ServerOfflineException | ServerNotBoundException e) {
+//							showServerOffLineMessage(e);
+//						} catch (IncorrectFormatException e) {
+//							showWarningIncorrectInformationEntered(e);
+//						}
+					}
+					else if (param.getButtonData() == ButtonData.NO && checkIfAllDialogHasBeenFilledIn(grdpn)){
+						try {
+							return userController.setCoordinatorExpertise(login.value.getValue(), cmbbx.getValue(),new PtBoolean(false));
+						} catch (ServerOfflineException | ServerNotBoundException e) {
+							showServerOffLineMessage(e);
+						} catch (IncorrectFormatException e) {
+							showWarningIncorrectInformationEntered(e);
+						}
+					}
+					//User cancelled the dialog
+					return new PtBoolean(true);
+				}
+			});
+			dialog.initOwner(window);
+			dialog.initModality(Modality.WINDOW_MODAL);
+			Optional<PtBoolean> result = dialog.showAndWait();
+			if (result.isPresent()){
+				if (!result.get().getValue())
+					showWarningMessage("Unable to change expertise of crisis", "Unable to change expertise of crisis, please try again");
+			}
+		
+		populateCrisis();
+	}
 	/**
 	 * Runs the function that will allow the current user to validate the selected alert.
 	 */
@@ -687,7 +705,12 @@ public void smscontrol() {
 		cmbbxCrisisStatus.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				populateCrisis();
+				try {
+					populateCrisis();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		tbpnMain.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
@@ -696,7 +719,12 @@ public void smscontrol() {
 				if (newValue == tbCoordAlerts)
 					populateAlerts();
 				else if (newValue == tbCoordCrisis)
-					populateCrisis();
+					try {
+						populateCrisis();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 		});
 		logonShowPanes(false);

@@ -17,13 +17,14 @@ import java.rmi.RemoteException;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAddOrDelete;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 
 /**
@@ -39,7 +40,7 @@ public interface ActCoordinator extends ActAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus) throws RemoteException, NotBoundException;
+	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus,DtLogin aDtLogin) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Requests an alert to be sent to the coordinator with the same status as the one provided.
@@ -152,7 +153,9 @@ public interface ActCoordinator extends ActAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in the RMI settings
 	 */
-	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtCrisisType aEtCrisisType,DtAddOrDelete adtAddOrDelete) throws RemoteException, NotBoundException;
+	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtExpertise aEtExpertise,PtBoolean ptboolean) throws RemoteException, NotBoundException;
+
+	public PtBoolean oeSetCoordinatorExpertise(DtLogin aDtLogin, EtExpertise aEtExpertise, PtBoolean ptBoolean) throws RemoteException, NotBoundException;
 	
 
 }

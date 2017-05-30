@@ -21,6 +21,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdm
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAuthenticated;
@@ -39,6 +40,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPh
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDateAndTime;
@@ -300,7 +302,7 @@ public interface IcrashSystem extends Remote {
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus) throws RemoteException; 
+	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus,DtLogin aDtLogin) throws RemoteException; 
 	
 	/**
 	 * Gets the alerts with the status specified.
@@ -377,6 +379,15 @@ public interface IcrashSystem extends Remote {
 	 */
 	public PtBoolean oeSetClock(DtDateAndTime aCurrentClock) throws RemoteException;
 
-	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtsmscode) throws RemoteException; 
+	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtsmscode) throws RemoteException;
+
+	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtExpertise aEtExpertise, PtBoolean adtAddOrDelete)throws RemoteException;
+
+	public PtBoolean oeSetCoordinatorExpertise(DtLogin aDtLogin, EtExpertise aEtExpertise, PtBoolean ptBoolean) throws RemoteException;
+	
+	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis);
+	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator);
+
+	 
 
 }

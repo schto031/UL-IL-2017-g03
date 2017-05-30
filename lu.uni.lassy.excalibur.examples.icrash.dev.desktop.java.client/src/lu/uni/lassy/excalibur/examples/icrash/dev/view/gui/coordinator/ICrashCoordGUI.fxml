@@ -171,7 +171,7 @@
                      <bottom>
                         <HBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
                            <children>
-                              <Button id="bttnTopLogoff" fx:id="bttnSetCoordinatorExpertise" disable="true" mnemonicParsing="false" onAction="#bttnSetCoordinatorExpertise_OnClick" prefHeight="50.0" prefWidth="139.0" text="Change expertise">
+                              <Button id="bttnTopLogoff" fx:id="bttnSetCoordinatorExpertise" mnemonicParsing="false" onAction="#bttnSetCoordinatorExpertise_OnClick" prefHeight="50.0" prefWidth="139.0" text="Change expertise">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

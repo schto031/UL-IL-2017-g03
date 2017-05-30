@@ -40,6 +40,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.db.DbComCompanies;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.db.DbCoordinators;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.db.DbCrises;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.db.DbHumans;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAuthenticated;
@@ -58,6 +59,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPh
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.DtSMS;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
@@ -112,8 +114,10 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	Hashtable<String, CtHuman> cmpSystemCtHuman = new Hashtable<String, CtHuman>();
 	
 	/**  A hashtable of the actor com companies in the system, stored by their name as a key. */
-	Hashtable<String, ActComCompany> cmpSystemActComCompany = new Hashtable<String, ActComCompany>();
-
+	Hashtable<String, ActComCompany> cmpSystemActComCompany = new Hashtable<String, ActComCompany>(); 
+	/**  A hashtable of the expertises in the system, stored by their name as a key. */
+	Hashtable<EtExpertise,ClExpertises> cmpSystemClExpertises = new Hashtable<EtExpertise, ClExpertises>();
+	
 	// Messir associations	
 	/**  A hashtable of the joint alerts and crises in the system, stored by their alert as a key. */
 	Hashtable<CtAlert, CtCrisis> assCtAlertCtCrisis = new Hashtable<CtAlert, CtCrisis>();
@@ -133,8 +137,13 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/**  A hashtable of the joint humans and Actor com companies in the system, stored by the human as a key. */
 	Hashtable<CtHuman, ActComCompany> assCtHumanActComCompany = new Hashtable<CtHuman, ActComCompany>();
 	
+	Hashtable<ClExpertises, CtCoordinator> assctExpertise = new Hashtable<ClExpertises, CtCoordinator>();
+	Hashtable<ClExpertises, CtCrisis> assctExpertiseReq = new Hashtable<ClExpertises, CtCrisis>();
+	
+	
 	/** The logger user by the system to print information to the console. */
 	private Logger log = Log4JUtils.getInstance().getLogger();
+	
 	
 	/*
 	 * ********************************
@@ -159,6 +168,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 
 		return listAlerts;
 	}
+	
 
 	/**
 	 * Gets the class Authenticated (Of a coordinator type) that has the associated ID provided.
@@ -487,6 +497,55 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 		return cmpSystemActComCompany.get(name);
 	}
 	
+	public List<ClExpertises> getExpertiseByCrisis(CtCrisis aCtCrisis) {
+
+		List<ClExpertises> listExpertises = new ArrayList<ClExpertises>();
+
+		for (ClExpertises ctExpertise : assctExpertiseReq.keySet()) {
+			if (assctExpertiseReq.get(ctExpertise).id.value.getValue().equals(
+					aCtCrisis.id.value.getValue()))
+				listExpertises.add(ctExpertise);
+		}
+
+		return listExpertises;
+	}
+	public List<ClExpertises> getExpertiseByCoordinator(CtCoordinator aCtCoordinator) {
+
+		List<ClExpertises> listExpertises = new ArrayList<ClExpertises>();
+
+		for (ClExpertises ctExpertise : assctExpertise.keySet()) {
+			if (assctExpertise.get(ctExpertise).id.value.getValue().equals(
+					aCtCoordinator.id.value.getValue()))
+				listExpertises.add(ctExpertise);
+		}
+
+		return listExpertises;
+	}
+//	public void createExpertiseList()
+//	{
+//		if(cmpSystemClExpertises.isEmpty())
+//		{
+//		for(EtExpertise ex:EtExpertise.values())
+//			{
+//				cmpSystemClExpertises.put(ex,new ClExpertises(ex));
+//			}
+//		}
+//	}
+	public void createClExpertise(EtExpertise ex)
+	{
+		if(!cmpSystemClExpertises.containsKey(ex))
+			{
+				cmpSystemClExpertises.put(ex,new ClExpertises(ex));
+			}
+	}
+	public ClExpertises getClExpertise(EtExpertise ex)
+	{
+		ClExpertises exp;
+		createClExpertise(ex);
+		exp=cmpSystemClExpertises.get(ex);
+
+		return exp;
+	}
 	/*
 	 * ************************
 	 * System operations 
@@ -990,8 +1049,10 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeGetCrisisSet(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus)
 	 */
-	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus) {
+	public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus,DtLogin aDtLogin) {
 		try{
+			CtCoordinator aCtCoordinator = (CtCoordinator) cmpSystemCtAuthenticated.get(aDtLogin.value.getValue());
+				
 			//PreP1
 			isSystemStarted();
 			//PreP2
@@ -1001,7 +1062,8 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				//go through all existing crises
 				for (String crisisKey : cmpSystemCtCrisis.keySet()) {
 					CtCrisis crisis = cmpSystemCtCrisis.get(crisisKey);
-					if (crisis.status.toString().equals(aEtCrisisStatus.toString()))
+					
+					if (crisis.status.toString().equals(aEtCrisisStatus.toString())&&getExpertiseByCoordinator(aCtCoordinator).containsAll(getExpertiseByCrisis(crisis)))
 						//PostF1
 						crisis.isSentToCoordinator(aActCoordinator);
 				}
@@ -1455,4 +1517,111 @@ public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtsmscode)throws Rem
 			return new PtBoolean(false);
 		}
 	}
+
+	
+	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtExpertise aEtExpertise, PtBoolean aDtAddOrDelete) throws RemoteException {
+		try{
+			//PreP1
+			isSystemStarted();
+			//PreP2
+			isUserLoggedIn();
+			CtCrisis theCrisis = cmpSystemCtCrisis.get(aDtCrisisID.value
+					.getValue());
+//			createExpertiseList();
+			if (currentRequestingAuthenticatedActor instanceof ActCoordinator) {
+				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
+				//PostF1
+				createClExpertise(aEtExpertise);
+				ClExpertises b=getClExpertise(aEtExpertise);
+				List<ClExpertises> a=getExpertiseByCrisis(theCrisis);
+				boolean c=(a.contains(b));
+				boolean d=aDtAddOrDelete.getValue();
+				if(!c&&d)
+				{
+					assctExpertiseReq.put(b, theCrisis);
+					PtString aMessage = new PtString("Expertise "+aEtExpertise.name()+" added to this crisis");
+					theActCoordinator.ieMessage(aMessage);
+				}
+				else if(c&&!d)
+				{
+					assctExpertiseReq.remove(b, theCrisis);
+					PtString aMessage = new PtString("Expertise "+aEtExpertise.name()+" deleted from this crisis");
+					theActCoordinator.ieMessage(aMessage);
+				}
+				else if(!c&&!d)
+				{
+					log.error("deletion not possible beacause this Crisis doesnt have a link to this expertise"+aEtExpertise.name());
+				}
+				else if(c&&d)
+				{
+					log.error("A link between Expertise"+aEtExpertise.name()+" cant be added to the requierments list because it is already part of the crisis requierments");
+				}
+				else 
+				{
+					log.error("Exception in oeSetCrisisExpertise...");
+				}
+	
+				return new PtBoolean(true);
+				
+			}
+		}
+		catch (Exception e){
+			log.error("Exception in oeSetCrisisExpertise..." + e);
+		}
+		return new PtBoolean(false);
+	}
+
+
+	public PtBoolean oeSetCoordinatorExpertise(DtLogin aDtLogin, EtExpertise aEtExpertise, PtBoolean ptBoolean)throws RemoteException {
+		try{
+			//PreP1
+			isSystemStarted();
+			//PreP2
+			isUserLoggedIn();
+			CtCoordinator aCtCoordinator = (CtCoordinator) cmpSystemCtAuthenticated.get(aDtLogin.value.getValue());
+//			createExpertiseList();
+			if (currentRequestingAuthenticatedActor instanceof ActCoordinator) {
+				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
+				//PostF1
+				createClExpertise(aEtExpertise);
+				ClExpertises b=getClExpertise(aEtExpertise);
+				List<ClExpertises> a=getExpertiseByCoordinator(aCtCoordinator);
+				boolean c=(a.contains(b));
+				boolean d=ptBoolean.getValue();
+				if(!c&&d)
+				{
+					assctExpertise.put(b, aCtCoordinator);
+					PtString aMessage = new PtString("Expertise "+aEtExpertise.name()+" added to this Coordinator");
+					theActCoordinator.ieMessage(aMessage);
+				}
+				else if(c&&!d)
+				{
+					assctExpertise.remove(b, aCtCoordinator);
+					PtString aMessage = new PtString("Expertise "+aEtExpertise.name()+" deleted from this Coordinator");
+					theActCoordinator.ieMessage(aMessage);
+				}
+				else if(!c&&!d)
+				{
+					log.error("deletion not possible beacause this Coordinator doesnt have a link to this expertise"+aEtExpertise.name());
+				}
+				else if(c&&d)
+				{
+					log.error("A link between Expertise"+aEtExpertise.name()+" cant be added to the requierments list because it is already part of the Coordinator expertises");
+				}
+				else 
+				{
+					log.error("Exception in oeSetCoordinatorExpertise...");
+				}
+	
+				return new PtBoolean(true);
+				
+			}
+		}
+		catch (Exception e){
+			log.error("Exception in oeSetCoordinatorExpertise..." + e);
+		}
+		return new PtBoolean(false);
+	}
+
+	
 }

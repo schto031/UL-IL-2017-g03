@@ -27,6 +27,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOf
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
@@ -34,6 +35,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
 import javafx.scene.layout.GridPane;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,9 +44,12 @@ import javafx.event.EventHandler;
  */
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -107,8 +112,21 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     /** The button that allows a user to logoff */
     @FXML
     private Button bttnAdminLogoff;
-
+    @FXML
+    private Button bttnSetCoordinatorExpertise;
     /**
+     * Button event that deals with changing the expertise of a coordinator
+     *
+     * @param event The event type fired, we do not need it's details
+     * @throws RemoteException 
+     */
+    @FXML
+    void bttnSetCoordinatorExpertise_OnClick(ActionEvent event)  {
+    	showCoordinatorScreen(TypeOfEdit.Expertise);
+    }
+
+   
+	/**
      * The button event that will show the controls for adding a coordinator
      *
      * @param event The event type thrown, we do not need this, but it must be specified
@@ -176,7 +194,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		Add,
 		
 		/** Deleting a coordinator. */
-		Delete
+		Delete, Expertise
 	}
 	
 	/**
@@ -224,6 +242,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		setUpMessageTables(tblvwAdminMessages);
 	}
 
+
 	/**
 	 * Shows the modify coordinator screen.
 	 *
@@ -236,8 +255,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		TextField txtfldUserName = new TextField();
 		TextField txtfldPhoneNumber= new TextField();
 		PasswordField psswrdfldPassword = new PasswordField();
+		ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
 		txtfldUserID.setPromptText("User ID");
 		Button bttntypOK = null;
+		Button bttntypok = null;
+		Button bttntypko = null;
 		GridPane grdpn = new GridPane();
 		grdpn.add(txtfldUserID, 1, 1);
 		switch(type){
@@ -254,7 +276,15 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		case Delete:
 			bttntypOK = new Button("Delete");
 			grdpn.add(bttntypOK, 1, 2);
-			break;		
+			break;
+		case Expertise:
+			bttntypok = new Button("Add");
+			bttntypko= new Button("delete");
+			cmbbx.setItems( FXCollections.observableArrayList( EtExpertise.values()));
+			grdpn.add(cmbbx, 1, 2);
+			grdpn.add(bttntypok, 1, 3);
+			grdpn.add(bttntypko, 2, 3);
+			
 		}
 		bttntypOK.setDefaultButton(true);
 		bttntypOK.setOnAction(new EventHandler<ActionEvent>() {
@@ -298,6 +328,40 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		AnchorPane.setBottomAnchor(grdpn, 0.0);
 		AnchorPane.setRightAnchor(grdpn, 0.0);
 		txtfldUserID.requestFocus();
+		bttntypok.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
+					showWarningNoDataEntered();
+				else{
+					DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
+					try {
+						userController.setCoordinatorExpertise(txtfldUserID.getText(), cmbbx.getValue(),new PtBoolean(true));}
+					 catch (ServerOfflineException | ServerNotBoundException e) {
+						showServerOffLineMessage(e);
+					} catch (IncorrectFormatException e) {
+						showWarningIncorrectInformationEntered(e);
+					}
+				}
+			}
+		});
+		bttntypok.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
+					showWarningNoDataEntered();
+				else{
+					DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
+					try {
+						userController.setCoordinatorExpertise(txtfldUserID.getText(), cmbbx.getValue(),new PtBoolean(false));}
+					 catch (ServerOfflineException | ServerNotBoundException e) {
+						showServerOffLineMessage(e);
+					} catch (IncorrectFormatException e) {
+						showWarningIncorrectInformationEntered(e);
+					}
+				}
+			}
+		});
 	}
 
 	/* (non-Javadoc)

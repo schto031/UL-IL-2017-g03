@@ -453,6 +453,7 @@ public abstract class AbstractGUIController implements Initializable {
 		TableColumn<CtCrisis, Double> latitudeCol = new TableColumn<CtCrisis, Double>("Latitude");
 		TableColumn<CtCrisis, String> commentCol = new TableColumn<CtCrisis, String>("Comment");
 		TableColumn<CtCrisis, String> statusCol = new TableColumn<CtCrisis, String>("Status");
+		TableColumn<CtCrisis, String> expclo = new TableColumn<CtCrisis, String>("Expertise");
 		idCol.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
 			
 			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> crisis) {
@@ -494,6 +495,11 @@ public abstract class AbstractGUIController implements Initializable {
 				return new ReadOnlyObjectWrapper<String>(crisis.getValue().type.name());
 			}
 		});
+		expclo.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> crisis) {
+				return new ReadOnlyObjectWrapper<String>();
+			}
+		});
 		tblvw.getColumns().add(idCol);
 		tblvw.getColumns().add(dateCol);
 		tblvw.getColumns().add(timeCol);
@@ -502,6 +508,7 @@ public abstract class AbstractGUIController implements Initializable {
 		tblvw.getColumns().add(latitudeCol);
 		tblvw.getColumns().add(commentCol);
 		tblvw.getColumns().add(statusCol);
+		tblvw.getColumns().add(expclo);
 		setColumnsSameWidth(tblvw);
 	}
 	
