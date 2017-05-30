@@ -15,8 +15,12 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
@@ -83,4 +87,7 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 	public PtBoolean ieMessage(PtString aMessage) throws RemoteException;
 
 	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtsmscode) throws RemoteException, NotBoundException;
+
+	
+	
 }

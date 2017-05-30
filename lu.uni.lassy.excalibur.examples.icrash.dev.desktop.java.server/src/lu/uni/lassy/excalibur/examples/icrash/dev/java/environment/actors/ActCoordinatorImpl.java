@@ -16,9 +16,12 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
@@ -27,6 +30,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.RmiUtils;
@@ -54,7 +58,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeGetCrisisSet(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus)
 	 */
-	synchronized public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeGetCrisisSet(EtCrisisStatus aEtCrisisStatus,DtLogin aDtLogin) throws RemoteException, NotBoundException {
 	
 		Logger log = Log4JUtils.getInstance().getLogger();
 	
@@ -68,7 +72,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeGetCrisisSet sent to system");
-		PtBoolean res = iCrashSys_Server.oeGetCrisisSet(aEtCrisisStatus);
+		PtBoolean res = iCrashSys_Server.oeGetCrisisSet(aEtCrisisStatus,aDtLogin);
 			
 			
 		if(res.getValue() == true)
@@ -332,4 +336,42 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 			log.info("operation oeGetAlertsSet successfully executed by the system");
 		return res;
 	}
+
+	//Peter bearbeiten
+	public PtBoolean oeSetCrisisExpertise(DtCrisisID aDtCrisisID, EtExpertise aEtExpertise,
+			PtBoolean adtAddOrDelete) throws RemoteException, NotBoundException {
+		Logger log = Log4JUtils.getInstance().getLogger();
+		
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+			 	
+		//Gathering the remote object as it was published into the registry
+	    IcrashSystem iCrashSys_Server = (IcrashSystem)registry.lookup("iCrashServer");
+		//set up ActAuthenticated instance that performs the request
+		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+		log.info("message ActCoordinator.oeSetCrisisExpertise sent to system");
+		PtBoolean res = iCrashSys_Server.oeSetCrisisExpertise(aDtCrisisID,aEtExpertise,adtAddOrDelete);
+		if(res.getValue() == true)
+			log.info("operation oeSetCrisisExpertise successfully executed by the system");
+		return res;
+	}
+
+	public PtBoolean oeSetCoordinatorExpertise(DtLogin aDtLogin, EtExpertise aEtExpertise, PtBoolean ptBoolean)throws RemoteException, NotBoundException  {
+		Logger log = Log4JUtils.getInstance().getLogger();
+		
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+			 	
+		//Gathering the remote object as it was published into the registry
+	    IcrashSystem iCrashSys_Server = (IcrashSystem)registry.lookup("iCrashServer");
+		//set up ActAuthenticated instance that performs the request
+		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+		log.info("message ActCoordinator.oeSetCoordinatorExpertise sent to system");
+		PtBoolean res = iCrashSys_Server.oeSetCoordinatorExpertise(aDtLogin,aEtExpertise,ptBoolean);
+		if(res.getValue() == true)
+			log.info("operation oeSetCoordinatorExpertise successfully executed by the system");
+		return res;
+	}
+
+
 }

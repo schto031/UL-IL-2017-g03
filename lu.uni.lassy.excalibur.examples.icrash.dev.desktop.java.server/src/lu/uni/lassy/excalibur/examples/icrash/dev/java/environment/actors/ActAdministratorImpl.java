@@ -16,13 +16,19 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.RmiUtils;
@@ -161,5 +167,45 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		}
 		return new PtBoolean(true);
 	}
+
+	@Override
+	public PtBoolean oeSetCoordinatorExpertise(DtLogin aDtLogin, EtExpertise ex, PtBoolean ptBoolean)
+			throws RemoteException, NotBoundException {
+		Logger log = Log4JUtils.getInstance().getLogger();
+		
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+			 	
+		//Gathering the remote object as it was published into the registry
+	    IcrashSystem iCrashSys_Server = (IcrashSystem)registry.lookup("iCrashServer");
+		//set up ActAuthenticated instance that performs the request
+		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+		log.info("message ActCoordinator.oeSetCoordinatorExpertise sent to system");
+		PtBoolean res = iCrashSys_Server.oeSetCoordinatorExpertise(aDtLogin,ex,ptBoolean);
+		if(res.getValue() == true)
+			log.info("operation oeSetCoordinatorExpertise successfully executed by the system");
+		return res;
+	}
+
+	public ArrayList<DtCoordinatorID> getAllCoordinatorID() throws RemoteException, NotBoundException {
+		
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+			 	
+		//Gathering the remote object as it was published into the registry
+	    IcrashSystem iCrashSys_Server = (IcrashSystem)registry.lookup("iCrashServer");
+		//set up ActAuthenticated instance that performs the request
+		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+		ArrayList<CtCoordinator> ctcoord=iCrashSys_Server.getAllCtCoordinators();
+		ArrayList<DtCoordinatorID> res = new ArrayList<DtCoordinatorID>();
+		for(CtCoordinator cor:ctcoord)
+		{
+			res.add(cor.id);
+		}
+		
+		return res;
+	}
+
+
 
 }
