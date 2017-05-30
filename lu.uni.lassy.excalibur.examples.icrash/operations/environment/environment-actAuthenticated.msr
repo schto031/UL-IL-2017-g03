@@ -47,6 +47,8 @@ postF{
       	AptStringMessageForTheactAuthenticated
             .eq('SmsCode has been sent')
             and TheactAuthenticated.rnInterfaceIN^ieMessage(AptStringMessageForTheactAuthenticated)
+            and AptStringMessageForTheactComCompany.eq('SmsCode:'.ptStringConcat(TheactAuhenticated.rncAuthenticated.smscode.ptStringConcat('Phonenumber'.ptStringConcat(TheactAuhenticated.rncAuthenticated.Phonenumber))))
+           and TheSystem.rnactComCompany.rnInterfaceIN^ieMessage(AptStringMessageForTheactComCompany)
            )
       else (AptStringMessageForTheactAuthenticated
             .eq('Wrong identification information ! Please try again ...')

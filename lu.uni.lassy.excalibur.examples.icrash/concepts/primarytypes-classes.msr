@@ -86,11 +86,13 @@ import lu.uni.lassy.messir.libraries.calendar
 				attribute login:dtLogin
 				attribute pwd: dtPassword
 				attribute smscode: dtSmsCode
+				attribute PhoneNumber: dtPhoneNumber
 				attribute vpIsLogged:ptBoolean
 				
 				operation init(
 										Alogin:dtLogin ,
-										Apwd:dtPassword ):ptBoolean
+										Apwd:dtPassword,
+										APhoneNumber:dtPhoneNumber ):ptBoolean
 			}
 			
 			class ctCoordinator 
@@ -103,7 +105,8 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation init(
 										Aid:dtCoordinatorID ,
 										Alogin:dtLogin ,
-										Apwd:dtPassword ):ptBoolean
+										Apwd:dtPassword,
+										APhoneNumber:dtPhoneNumber ):ptBoolean
 			}
 
 			class ctAdministrator 
@@ -113,7 +116,8 @@ import lu.uni.lassy.messir.libraries.calendar
 
 				operation init(
 										Alogin:dtLogin ,
-										Apwd:dtPassword ):ptBoolean
+										Apwd:dtPassword,
+										APhoneNumber:dtPhoneNumber ):ptBoolean
 			}
 		class clExpertrises 
 		role rnclExpertrises 

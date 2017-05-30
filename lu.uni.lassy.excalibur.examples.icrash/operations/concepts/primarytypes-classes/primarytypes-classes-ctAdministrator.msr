@@ -9,7 +9,8 @@ Operation Model {
 
 operation: icrash.concepts.primarytypes.classes.ctAdministrator.init(
   Alogin:dtLogin ,
-  Apwd:dtPassword 
+  Apwd:dtPassword,
+  APhoneNumber:dtPhoneNumber
   ):ptBoolean{
 postF{
 if
@@ -18,6 +19,7 @@ let Self:ctAdministrator in
 /* Post F01 */
 Self.login(Alogin)
 and Self.pwd = Apwd
+and Self.PhoneNumber =APhoneNumber
 and Self.vpIsLogged = false
 
 /* Post F02 */
