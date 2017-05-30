@@ -14,6 +14,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.model.actors;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
@@ -248,6 +250,13 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 			return ((ActCoordinator) getServerSideActor()).oeSetCoordinatorExpertise(aDtLogin, aEtExpertise, ptBoolean);
 		else
 			return new PtBoolean(false);	}
+
+	@Override
+	public ArrayList<DtCoordinatorID> getAllCoordinatorID() throws RemoteException, NotBoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

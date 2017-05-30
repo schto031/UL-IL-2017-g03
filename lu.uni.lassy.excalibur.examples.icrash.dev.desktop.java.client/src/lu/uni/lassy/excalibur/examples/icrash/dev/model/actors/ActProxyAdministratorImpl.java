@@ -14,6 +14,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.model.actors;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
@@ -116,9 +117,17 @@ public class ActProxyAdministratorImpl extends ActProxyAuthenticatedImpl impleme
 	public PtBoolean setCoordinatorExpertise(DtLogin aDtLogin, EtExpertise ex, PtBoolean ptBoolean)
 			throws RemoteException, NotBoundException  {
 		if (getServerSideActor() != null)
-			return ((ActCoordinator) getServerSideActor()).oeSetCoordinatorExpertise(aDtLogin, ex, ptBoolean);
+			return ((ActAdministrator) getServerSideActor()).oeSetCoordinatorExpertise(aDtLogin, ex, ptBoolean);
 		else
 			return new PtBoolean(false);	}
+
+	@Override
+	public ArrayList<DtCoordinatorID> getAllCoordinatorID() throws RemoteException, NotBoundException {
+		if (getServerSideActor() != null)
+			return ((ActAdministrator) getServerSideActor()).getAllCoordinatorID();
+		else
+			return null;
+	}
 
 
 }

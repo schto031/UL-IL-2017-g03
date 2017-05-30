@@ -16,6 +16,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntHasServerSideActor;
@@ -23,6 +24,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntI
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
@@ -102,4 +104,6 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	public UserType getUserType() throws RemoteException;
 	public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtPassword) throws RemoteException, NotBoundException;
 	public PtBoolean setCoordinatorExpertise(DtLogin aDtLogin, EtExpertise ex, PtBoolean ptBoolean) throws RemoteException, NotBoundException;
+	public ArrayList<DtCoordinatorID> getAllCoordinatorID()throws RemoteException, NotBoundException;
+	
 }

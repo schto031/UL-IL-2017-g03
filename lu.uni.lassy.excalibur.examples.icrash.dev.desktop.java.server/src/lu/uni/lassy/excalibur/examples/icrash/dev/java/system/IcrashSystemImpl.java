@@ -1616,6 +1616,42 @@ public PtBoolean oeSmscontrol(DtLogin aDtLogin, DtPassword aDtsmscode)throws Rem
 				return new PtBoolean(true);
 				
 			}
+			else if(currentRequestingAuthenticatedActor instanceof ActAdministrator)
+			{
+				ActAdministrator theActAdmin = (ActAdministrator) currentRequestingAuthenticatedActor;
+				//PostF1
+				createClExpertise(aEtExpertise);
+				ClExpertises b=getClExpertise(aEtExpertise);
+				List<ClExpertises> a=getExpertiseByCoordinator(aCtCoordinator);
+				boolean c=(a.contains(b));
+				boolean d=ptBoolean.getValue();
+				if(!c&&d)
+				{
+					assctExpertise.put(b, aCtCoordinator);
+					PtString aMessage = new PtString("Expertise "+aEtExpertise.name()+" added to this Coordinator");
+					theActAdmin.ieMessage(aMessage);
+				}
+				else if(c&&!d)
+				{
+					assctExpertise.remove(b, aCtCoordinator);
+					PtString aMessage = new PtString("Expertise "+aEtExpertise.name()+" deleted from this Coordinator");
+					theActAdmin.ieMessage(aMessage);
+				}
+				else if(!c&&!d)
+				{
+					log.error("deletion not possible beacause this Coordinator doesnt have a link to this expertise"+aEtExpertise.name());
+				}
+				else if(c&&d)
+				{
+					log.error("A link between Expertise"+aEtExpertise.name()+" cant be added to the requierments list because it is already part of the Coordinator expertises");
+				}
+				else 
+				{
+					log.error("Exception in oeSetCoordinatorExpertise...");
+				}
+	
+				return new PtBoolean(true);
+			}
 		}
 		catch (Exception e){
 			log.error("Exception in oeSetCoordinatorExpertise..." + e);

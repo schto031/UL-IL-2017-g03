@@ -14,6 +14,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.controller;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
@@ -23,6 +24,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdm
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIs;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -127,5 +129,20 @@ public class AdminController extends AbstractUserController {
 			}
 		}
 		return new PtBoolean(false);
+	}
+	public ArrayList<DtCoordinatorID> getAllCoordinatorID()throws ServerOfflineException, ServerNotBoundException,IncorrectFormatException {
+		if (getUserType() == UserType.Admin){
+			ActProxyAuthenticated actAuth = this.getAuth();
+			try {
+				return actAuth.getAllCoordinatorID();
+			} catch (RemoteException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerOfflineException();
+			} catch (NotBoundException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerNotBoundException();
+			}
+		}
+		return null;
 	}
 }

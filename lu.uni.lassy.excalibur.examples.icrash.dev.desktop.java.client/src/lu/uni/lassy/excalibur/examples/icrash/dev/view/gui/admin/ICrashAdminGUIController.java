@@ -16,6 +16,7 @@ import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.AdminController;
@@ -26,7 +27,9 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNo
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtExpertise;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
@@ -46,6 +49,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -53,6 +57,8 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.util.Callback;
 /*
  * This is the end of the import section to be replaced by modifications in the ICrash.fxml document from the sample skeleton controller
  */
@@ -119,13 +125,18 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      *
      * @param event The event type fired, we do not need it's details
      * @throws RemoteException 
+     * @throws IncorrectFormatException 
+     * @throws ServerNotBoundException 
+     * @throws ServerOfflineException 
      */
     @FXML
-    void bttnSetCoordinatorExpertise_OnClick(ActionEvent event)  {
-    	showCoordinatorScreen(TypeOfEdit.Expertise);
+    void bttnSetCoordinatorExpertise_OnClick(ActionEvent event) throws RemoteException, ServerOfflineException, ServerNotBoundException, IncorrectFormatException  {
+//    	showCoordinatorScreen(TypeOfEdit.Expertise);
+    	SetCoordinatorExpertise();
     }
+    
 
-   
+
 	/**
      * The button event that will show the controls for adding a coordinator
      *
@@ -194,7 +205,9 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		Add,
 		
 		/** Deleting a coordinator. */
-		Delete, Expertise
+		Delete
+//		, 
+//		Expertise
 	}
 	
 	/**
@@ -255,11 +268,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		TextField txtfldUserName = new TextField();
 		TextField txtfldPhoneNumber= new TextField();
 		PasswordField psswrdfldPassword = new PasswordField();
-		ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
+//		ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
 		txtfldUserID.setPromptText("User ID");
 		Button bttntypOK = null;
-		Button bttntypok = null;
-		Button bttntypko = null;
+//		Button bttntypok = null;
+//		Button bttntypko = null;
 		GridPane grdpn = new GridPane();
 		grdpn.add(txtfldUserID, 1, 1);
 		switch(type){
@@ -277,13 +290,13 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			bttntypOK = new Button("Delete");
 			grdpn.add(bttntypOK, 1, 2);
 			break;
-		case Expertise:
-			bttntypok = new Button("Add");
-			bttntypko= new Button("delete");
-			cmbbx.setItems( FXCollections.observableArrayList( EtExpertise.values()));
-			grdpn.add(cmbbx, 1, 2);
-			grdpn.add(bttntypok, 1, 3);
-			grdpn.add(bttntypko, 2, 3);
+//		case Expertise:
+//			bttntypok = new Button("Add");
+//			bttntypko= new Button("delete");
+//			cmbbx.setItems( FXCollections.observableArrayList( EtExpertise.values()));
+//			grdpn.add(cmbbx, 1, 2);
+//			grdpn.add(bttntypok, 1, 3);
+//			grdpn.add(bttntypko, 2, 3);
 			
 		}
 		bttntypOK.setDefaultButton(true);
@@ -315,6 +328,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 							else
 								showErrorMessage("Unable to delete coordinator", "An error occured when deleting the coordinator");
 							break;
+//						case Expertise:
+//							break;
+//						default:
+//							break;
 						}
 					} catch (ServerOfflineException | ServerNotBoundException | IncorrectFormatException e) {
 						showExceptionErrorMessage(e);
@@ -328,40 +345,100 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		AnchorPane.setBottomAnchor(grdpn, 0.0);
 		AnchorPane.setRightAnchor(grdpn, 0.0);
 		txtfldUserID.requestFocus();
-		bttntypok.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
-					showWarningNoDataEntered();
-				else{
-					DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
-					try {
-						userController.setCoordinatorExpertise(txtfldUserID.getText(), cmbbx.getValue(),new PtBoolean(true));}
-					 catch (ServerOfflineException | ServerNotBoundException e) {
-						showServerOffLineMessage(e);
-					} catch (IncorrectFormatException e) {
-						showWarningIncorrectInformationEntered(e);
-					}
+//		bttntypok.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
+//					showWarningNoDataEntered();
+//				else{
+////					DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
+//					try {
+//						userController.setCoordinatorExpertise(txtfldUserID.getText(), cmbbx.getValue(),new PtBoolean(true));}
+//					 catch (ServerOfflineException | ServerNotBoundException e) {
+//						showServerOffLineMessage(e);
+//					} catch (IncorrectFormatException e) {
+//						showWarningIncorrectInformationEntered(e);
+//					}
+//				}
+//			}
+//		});
+//		bttntypok.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
+//					showWarningNoDataEntered();
+//				else{
+////					DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
+//					try {
+//						userController.setCoordinatorExpertise(txtfldUserID.getText(), cmbbx.getValue(),new PtBoolean(false));}
+//					 catch (ServerOfflineException | ServerNotBoundException e) {
+//						showServerOffLineMessage(e);
+//					} catch (IncorrectFormatException e) {
+//						showWarningIncorrectInformationEntered(e);
+//					}
+//				}
+//			}
+//		});
+	}
+	
+	private void SetCoordinatorExpertise()throws RemoteException, ServerOfflineException, ServerNotBoundException, IncorrectFormatException {
+	Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
+	dialog.setTitle("Change the coordinator expertise");
+//	TextField txtfldCtCoordinatorID = new TextField();
+//	txtfldCtCoordinatorID.setDisable(false);
+	ComboBox<DtCoordinatorID> cmbbxx = new ComboBox<DtCoordinatorID>();
+	cmbbxx.setItems( FXCollections.observableArrayList(this.getAllCoordinatorID()));
+	ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
+	cmbbx.setItems( FXCollections.observableArrayList( EtExpertise.values()));
+	ButtonType bttntypAdd = new ButtonType("Add expertise", ButtonData.YES);
+	ButtonType bttntypRemove = new ButtonType("Remove expertise", ButtonData.NO);
+	ButtonType bttntypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+	GridPane grdpn = new GridPane();
+//	grdpn.add(txtfldCtCoordinatorID, 1, 1);
+	grdpn.add(cmbbxx, 1, 1);
+	grdpn.add(cmbbx, 1, 2);
+	dialog.getDialogPane().setContent(grdpn);
+	dialog.getDialogPane().getButtonTypes().add(bttntypeCancel);
+	dialog.getDialogPane().getButtonTypes().add(bttntypAdd);
+	dialog.getDialogPane().getButtonTypes().add(bttntypRemove);
+	dialog.setResultConverter(new Callback<ButtonType, PtBoolean>(){
+		@Override
+		public PtBoolean call(ButtonType param) {
+			if (param.getButtonData() == ButtonData.YES && checkIfAllDialogHasBeenFilledIn(grdpn)){
+				try {
+					return userController.setCoordinatorExpertise(cmbbxx.getValue().toString(), cmbbx.getValue(),new PtBoolean(true));
+				} catch (ServerOfflineException | ServerNotBoundException e) {
+					showServerOffLineMessage(e);
+				} catch (IncorrectFormatException e) {
+					showWarningIncorrectInformationEntered(e);
 				}
 			}
-		});
-		bttntypok.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
-					showWarningNoDataEntered();
-				else{
-					DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
-					try {
-						userController.setCoordinatorExpertise(txtfldUserID.getText(), cmbbx.getValue(),new PtBoolean(false));}
-					 catch (ServerOfflineException | ServerNotBoundException e) {
-						showServerOffLineMessage(e);
-					} catch (IncorrectFormatException e) {
-						showWarningIncorrectInformationEntered(e);
-					}
+			else if (param.getButtonData() == ButtonData.NO && checkIfAllDialogHasBeenFilledIn(grdpn)){
+				try {
+					return userController.setCoordinatorExpertise(cmbbxx.getValue().toString(), cmbbx.getValue(),new PtBoolean(false));
+				} catch (ServerOfflineException | ServerNotBoundException e) {
+					showServerOffLineMessage(e);
+				} catch (IncorrectFormatException e) {
+					showWarningIncorrectInformationEntered(e);
 				}
 			}
-		});
+			//User cancelled the dialog
+			return new PtBoolean(true);
+		}
+	});
+	dialog.initOwner(window);
+	dialog.initModality(Modality.WINDOW_MODAL);
+	Optional<PtBoolean> result = dialog.showAndWait();
+	if (result.isPresent()){
+		if (!result.get().getValue())
+			showWarningMessage("Unable to change expertise of crisis", "Unable to change expertise of coordinator, please try again");
+	}
+
+}
+	public ArrayList<DtCoordinatorID> getAllCoordinatorID() throws ServerOfflineException, ServerNotBoundException, IncorrectFormatException
+	{
+		return userController.getAllCoordinatorID();
+		
 	}
 
 	/* (non-Javadoc)
