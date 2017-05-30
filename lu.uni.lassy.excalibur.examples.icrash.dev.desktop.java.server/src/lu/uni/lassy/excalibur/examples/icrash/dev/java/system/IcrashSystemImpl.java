@@ -1062,8 +1062,8 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				//go through all existing crises
 				for (String crisisKey : cmpSystemCtCrisis.keySet()) {
 					CtCrisis crisis = cmpSystemCtCrisis.get(crisisKey);
-					
-					if (crisis.status.toString().equals(aEtCrisisStatus.toString())&&getExpertiseByCoordinator(aCtCoordinator).containsAll(getExpertiseByCrisis(crisis)))
+					boolean b=getExpertiseByCoordinator(aCtCoordinator).containsAll(getExpertiseByCrisis(crisis));
+					if (crisis.status.toString().equals(aEtCrisisStatus.toString())&&b)
 						//PostF1
 						crisis.isSentToCoordinator(aActCoordinator);
 				}

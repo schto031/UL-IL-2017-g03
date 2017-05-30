@@ -305,8 +305,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	private void populateCrisis() throws RemoteException{
 		try {
-			ActCoordinator cord=(ActCoordinator)actor;
-			DtLogin login=cord.getLogin();
+			DtLogin login=userController.getAuth().getLogin();
 			userController.oeGetCrisisSet(cmbbxCrisisStatus.getValue(),login);
 		} catch (ServerOfflineException | ServerNotBoundException e) {
 			showServerOffLineMessage(e);
@@ -520,8 +519,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 			Dialog<PtBoolean> dialog = new Dialog<PtBoolean>();
 			dialog.setTitle("Change the coordinator expertise");
 			TextField txtfldCtCrisisID = new TextField();
-			ActCoordinator cord=(ActCoordinator)actor;
-			DtLogin login=cord.getLogin();
+			DtLogin login=userController.getAuth().getLogin();
 			txtfldCtCrisisID.setText(login.value.getValue());
 			txtfldCtCrisisID.setDisable(true);
 			ComboBox<EtExpertise> cmbbx = new ComboBox<EtExpertise>();
@@ -540,14 +538,13 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 				@Override
 				public PtBoolean call(ButtonType param) {
 					if (param.getButtonData() == ButtonData.YES && checkIfAllDialogHasBeenFilledIn(grdpn)){
-//						try {
-							//return userController.setCoordinatorExpertise(login.value.getValue(), cmbbx.getValue(),new PtBoolean(true));
-							System.out.println("yes");
-//						} catch (ServerOfflineException | ServerNotBoundException e) {
-//							showServerOffLineMessage(e);
-//						} catch (IncorrectFormatException e) {
-//							showWarningIncorrectInformationEntered(e);
-//						}
+						try {
+							return userController.setCoordinatorExpertise(login.value.getValue(), cmbbx.getValue(),new PtBoolean(true));
+						} catch (ServerOfflineException | ServerNotBoundException e) {
+							showServerOffLineMessage(e);
+						} catch (IncorrectFormatException e) {
+							showWarningIncorrectInformationEntered(e);
+						}
 					}
 					else if (param.getButtonData() == ButtonData.NO && checkIfAllDialogHasBeenFilledIn(grdpn)){
 						try {
