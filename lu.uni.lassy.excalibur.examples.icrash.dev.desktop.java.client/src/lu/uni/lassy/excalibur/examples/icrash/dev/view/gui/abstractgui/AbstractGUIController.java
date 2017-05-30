@@ -41,6 +41,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.ClExpertises;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
@@ -334,6 +335,7 @@ public abstract class AbstractGUIController implements Initializable {
 		TableColumn<CtCoordinator, String> idCol = new TableColumn<CtCoordinator, String>("ID");
 		TableColumn<CtCoordinator, String> nameCol = new TableColumn<CtCoordinator, String>("Username");
 		TableColumn<CtCoordinator, String> passwordCol = new TableColumn<CtCoordinator, String>("Password");
+		TableColumn<CtCoordinator, String> excol = new TableColumn<CtCoordinator, String>("Expertise");
 		idCol.setCellValueFactory(new Callback<CellDataFeatures<CtCoordinator, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(CellDataFeatures<CtCoordinator, String> coord) {
 				return new ReadOnlyObjectWrapper<String>(coord.getValue().id.value.getValue());
@@ -349,10 +351,16 @@ public abstract class AbstractGUIController implements Initializable {
 				return new ReadOnlyObjectWrapper<String>(coord.getValue().pwd.value.getValue());
 			}
 		});
+		excol.setCellValueFactory(new Callback<CellDataFeatures<CtCoordinator, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtCoordinator, String> coord) {
+				return new ReadOnlyObjectWrapper<String>();
+			}
+		});
 		tblvw.getColumns().add(idCol);
 		tblvw.getColumns().add(nameCol);
 		if (showPassword)
 			tblvw.getColumns().add(passwordCol);
+		tblvw.getColumns().add(excol);
 		setColumnsSameWidth(tblvw);
 	}
 	
@@ -437,6 +445,15 @@ public abstract class AbstractGUIController implements Initializable {
 		tblvw.getColumns().add(commentCol);
 		tblvw.getColumns().add(statusCol);
 		setColumnsSameWidth(tblvw);
+	}
+	public String transformExpert(ArrayList<ClExpertises> list)
+	{
+		String string=null;
+		for (ClExpertises ex:list)
+		{
+			string=(string+","+ex.expertise.toString());
+		}
+		return string;
 	}
 	
 	/**

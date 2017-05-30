@@ -91,9 +91,6 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     /** The button that initiates the login function. */
     @FXML
     private Button bttnAdminLogin;
-    
-   
-
     /** The borderpane that contains the normal controls the user will use. */
     @FXML
     private BorderPane brdpnAdmin;
